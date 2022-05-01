@@ -1,27 +1,27 @@
-# #:import vibrator plyer.vibrator
+### #:import vibrator plyer.vibrator
 <VibrationInterface>:
     orientation: 'vertical'
     Label:
         size_hint_y: None
         height: sp(40)
         # text: 'vibrator exists: ' + str(vibrator.exists())
-        text: 'vibrator exists: ' + str(app.exists())
+        text: 'vibrator exists: ' + str(root.exists())
     Button:
         text: 'vibrate 10s'
         # on_release: vibrator.vibrate(10)
-        on_release: app.vibro(10)
+        on_release: root.vibro(10)
     Button:
         text: 'vibrate 1s'
         # on_release: vibrator.vibrate(1)
-        on_release: app.vibro(1)
+        on_release: root.vibro(1)
     Button:
         text: 'vibrate 0.1s'
         # on_release: vibrator.vibrate(0.1)
-        on_release: app.vibro(0.1)
+        on_release: root.vibro(0.1)
     Button:
         text: 'cancel vibration'
         # on_release: vibrator.cancel()
-        on_release: app.cancel()
+        on_release: root.cancel()
     TextInput:
         id: ti
         text: '0.5,0.5,1,2,0.1,0.1,0.1,0.1,0.1,0.1'
@@ -29,4 +29,4 @@
         text: 'vibrate pattern'
         on_release:
             # vibrator.pattern([float(n) for n in ti.text.split(',')])
-            app.pattern()
+            root.pattern()
