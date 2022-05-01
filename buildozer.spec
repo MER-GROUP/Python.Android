@@ -1,13 +1,13 @@
 [app]
 
 # (str) Title of your application
-title = Plyer vibrate test
+title = Plyer
 
 # (str) Package name
-package.name = plyervibrate
+package.name = plyer
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.test
+package.domain = org.plyer
 
 # (str) Source code where the main.py live
 source.dir = .
