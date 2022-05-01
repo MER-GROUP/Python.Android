@@ -4,3 +4,4 @@
 /.kivy/
 /.buildozer/
 /bin/
+/vibrator/__pycache__/
