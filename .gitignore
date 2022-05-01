@@ -1,0 +1,6 @@
+/__pycache__/
+/kivy_venv/
+/kivy_venv_back/
+/.kivy/
+/.buildozer/
+/bin/
