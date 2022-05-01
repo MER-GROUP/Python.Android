@@ -1,7 +1,7 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
-from plyer.vibrator import vibrator
+from plyer import vibrator
 
 Builder.load_file('vibrator.kv')
 
