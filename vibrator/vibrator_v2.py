@@ -9,23 +9,14 @@ Builder.load_file('vibrator.kv')
 class VibrationInterface(BoxLayout):
     '''Root Widget.'''
     
-    def vibro(self, n):
-        return self.__is_android()
-
-    def cancel(self):
-        return self.__is_android()
-
-    def pattern(self):
-        return self.__is_android()
-
-    def exists(self):
-        return self.__is_android()
-
-    def __is_android(self):
+    def is_android(self):
         if 'android' == platform:
             return True
         else:
             return False
+
+    def do_nothing(self):
+        pass
 
 class VibrationApp(App):
     def build(self):

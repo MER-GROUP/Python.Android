@@ -1,27 +1,27 @@
-### #:import vibrator plyer.vibrator
+#:import vibrator plyer.vibrator
 <VibrationInterface>:
     orientation: 'vertical'
     Label:
         size_hint_y: None
         height: sp(40)
         # text: 'vibrator exists: ' + str(vibrator.exists())
-        text: 'vibrator exists: ' + str(root.exists())
+        text: 'vibrator exists: ' + str(vibrator.exists() if root.is_android() else root.do_nothing())
     Button:
         text: 'vibrate 10s'
         # on_release: vibrator.vibrate(10)
-        on_release: root.vibro(10)
+        on_release: vibrator.vibrate(10) if root.is_android() else root.do_nothing()
     Button:
         text: 'vibrate 1s'
         # on_release: vibrator.vibrate(1)
-        on_release: root.vibro(1)
+        on_release: vibrator.vibrate(1) if root.is_android() else root.do_nothing()
     Button:
         text: 'vibrate 0.1s'
         # on_release: vibrator.vibrate(0.1)
-        on_release: root.vibro(0.1)
+        on_release: vibrator.vibrate(0.1) if root.is_android() else root.do_nothing()
     Button:
         text: 'cancel vibration'
         # on_release: vibrator.cancel()
-        on_release: root.cancel()
+        on_release: vibrator.cancel() if root.is_android() else root.do_nothing()
     TextInput:
         id: ti
         text: '0.5,0.5,1,2,0.1,0.1,0.1,0.1,0.1,0.1'
@@ -29,4 +29,4 @@
         text: 'vibrate pattern'
         on_release:
             # vibrator.pattern([float(n) for n in ti.text.split(',')])
-            root.pattern()
+            vibrator.pattern([float(n) for n in ti.text.split(',')]) if root.is_android() else root.do_nothing()
