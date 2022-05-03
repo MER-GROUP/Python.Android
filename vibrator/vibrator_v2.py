@@ -1,7 +1,8 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
-from plyer import vibrator
+from kivy.utils import platform
+
 
 Builder.load_file('vibrator.kv')
 
@@ -9,17 +10,22 @@ class VibrationInterface(BoxLayout):
     '''Root Widget.'''
     
     def vibro(self, n):
-        vibrator.vibrate(n)
+        return self.__is_android()
 
     def cancel(self):
-        vibrator.cancel()
+        return self.__is_android()
 
     def pattern(self):
-        # vibrator.pattern([float(n) for n in self.root.ids.ti.text.split(',')])
-        vibrator.pattern([float(n) for n in self.ids.ti.text.split(',')])
+        return self.__is_android()
 
     def exists(self):
-        vibrator.exists()
+        return self.__is_android()
+
+    def __is_android(self):
+        if 'android' == platform:
+            return True
+        else:
+            return False
 
 class VibrationApp(App):
     def build(self):
