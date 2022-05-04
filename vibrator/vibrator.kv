@@ -4,29 +4,23 @@
     Label:
         size_hint_y: None
         height: sp(40)
-        # text: 'vibrator exists: ' + str(vibrator.exists())
-        text: 'vibrator exists: ' + str(vibrator.exists() if root.is_android() else root.do_nothing())
+        text: 'vibrator exists: ' + str(vibrator.exists())
     Button:
         text: 'vibrate 10s'
-        # on_release: vibrator.vibrate(10)
-        on_release: vibrator.vibrate(10) if root.is_android() else root.do_nothing()
+        on_release: vibrator.vibrate(10)
     Button:
         text: 'vibrate 1s'
-        # on_release: vibrator.vibrate(1)
-        on_release: vibrator.vibrate(1) if root.is_android() else root.do_nothing()
+        on_release: vibrator.vibrate(1)
     Button:
         text: 'vibrate 0.1s'
-        # on_release: vibrator.vibrate(0.1)
-        on_release: vibrator.vibrate(0.1) if root.is_android() else root.do_nothing()
+        on_release: vibrator.vibrate(0.1)
     Button:
         text: 'cancel vibration'
-        # on_release: vibrator.cancel()
-        on_release: vibrator.cancel() if root.is_android() else root.do_nothing()
+        on_release: vibrator.cancel()
     TextInput:
         id: ti
         text: '0.5,0.5,1,2,0.1,0.1,0.1,0.1,0.1,0.1'
     Button:
         text: 'vibrate pattern'
         on_release:
-            # vibrator.pattern([float(n) for n in ti.text.split(',')])
-            vibrator.pattern([float(n) for n in ti.text.split(',')]) if root.is_android() else root.do_nothing()
+            vibrator.pattern([float(n) for n in ti.text.split(',')])

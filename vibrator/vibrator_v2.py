@@ -1,14 +1,18 @@
 from kivy.app import App
-from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+
+import os.path
+from os.path import dirname
+from kivy.lang import Builder
 from kivy.utils import platform
 
-
-Builder.load_file('vibrator.kv')
+# Builder.load_file('vibrator.kv') # not work
+Builder.load_file(os.path.join(dirname(__file__), 'vibrator.kv'))
 
 class VibrationInterface(BoxLayout):
     '''Root Widget.'''
-    
+   
     def is_android(self):
         if 'android' == platform:
             return True
