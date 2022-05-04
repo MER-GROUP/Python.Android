@@ -10,7 +10,7 @@ if 'android' == platform:
     from plyer import vibrator
 
 # Builder.load_file('vibrator.kv') # not work
-Builder.load_file(os.path.join(dirname(__file__), 'vibrator.kv'))
+Builder.load_file(os.path.join(dirname(__file__), 'vibrator2.kv'))
 
 class VibrationInterface(BoxLayout):
     '''Root Widget.'''
