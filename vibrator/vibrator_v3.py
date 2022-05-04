@@ -23,7 +23,7 @@ class VibrationInterface(BoxLayout):
 
     def exists(self):
         if self.__is_android():
-            vibrator.exists()
+            return vibrator.exists()
         else:
             self.__do_nothing()
 
