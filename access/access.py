@@ -21,8 +21,10 @@ class Main(BoxLayout):
     '''Root Widget'''
     # ---------------------------------------------------------------------------
     # показать все файлы в текущей директории
+    # отсортировано по возрастанию
     def show_files_dir(self):
-        self.ids.text_input_main.text = '\n'.join(listdir())
+        # self.ids.text_input_main.text = '\n'.join(listdir())
+        self.ids.text_input_main.text = '\n'.join(sorted(listdir()))
     # ---------------------------------------------------------------------------
     pass
     # ---------------------------------------------------------------------------
