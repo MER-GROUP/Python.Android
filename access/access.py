@@ -4,7 +4,7 @@ from kivy.app import App
 # коробочный макет
 from kivy.uix.boxlayout import BoxLayout
 # кнопка
-from kivy.uix.button import Button
+# from kivy.uix.button import Button
 # импортируем молуль os.path
 # dirname - определяем текущую директорию
 # join - объеденяем директорию + файл (правильный путь файла)
@@ -12,12 +12,22 @@ from os.path import join, dirname
 # импорт модуля Строитель - загружает .kv файлы в проект
 from kivy.lang import Builder
 Builder.load_file(join(dirname(__file__), 'main.kv'))
+# импортируем молуль os
+# listdir - файлы в текущей директории
+from os import listdir
 # *****************************************************************************************
 class Main(BoxLayout):
     # ---------------------------------------------------------------------------
     '''Root Widget'''
     # ---------------------------------------------------------------------------
+    # показать все файлы в текущей директории
+    # отсортировано по возрастанию
+    def show_files_dir(self):
+        # self.ids.text_input_main.text = '\n'.join(listdir())
+        self.ids.text_input_main.text = '\n'.join(sorted(listdir()))
+    # ---------------------------------------------------------------------------
     pass
+    # ---------------------------------------------------------------------------
 # *****************************************************************************************
 # окно программы
 class AccessApp(App):
