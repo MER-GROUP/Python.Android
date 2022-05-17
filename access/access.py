@@ -4,7 +4,7 @@ from kivy.app import App
 # коробочный макет
 from kivy.uix.boxlayout import BoxLayout
 # кнопка
-from kivy.uix.button import Button
+# from kivy.uix.button import Button
 # импортируем молуль os.path
 # dirname - определяем текущую директорию
 # join - объеденяем директорию + файл (правильный путь файла)
