@@ -14,17 +14,44 @@ from kivy.lang import Builder
 Builder.load_file(join(dirname(__file__), 'main.kv'))
 # импортируем молуль os
 # listdir - файлы в текущей директории
+import os
 from os import listdir
+# импортируем молуль stat
+import stat
 # *****************************************************************************************
 class Main(BoxLayout):
     # ---------------------------------------------------------------------------
     '''Root Widget'''
     # ---------------------------------------------------------------------------
-    # показать все файлы в текущей директории
+    # показать все файлы в текущей директории с установленными разрешениями
     # отсортировано по возрастанию
     def show_files_dir(self):
+        # получаем все файлы и папки в текущей директории и сортируем
         # self.ids.text_input_main.text = '\n'.join(listdir())
-        self.ids.text_input_main.text = '\n'.join(sorted(listdir()))
+        files_arr = sorted(listdir())
+        # массив установленныз разрешений для файлов и папок
+        access_arr = list()
+        # заполняем массив установленныз разрешений для файлов и папок
+        for i in files_arr:
+            # Определим установленные разрешения
+            access_arr.append(stat.S_IMODE(os.stat(i).st_mode))
+
+        # Определим установленные разрешения
+        # existing_permissions = stat.S_IMODE(os.stat(files_arr[0]).st_mode)
+        existing_permissions = dict(zip(files_arr, access_arr))
+
+        # хранение информации о файлах и папках
+        output_str = str()
+        # заполнеяем хранение информации о файлах и папках
+        for k, v in existing_permissions.items():
+            output_str += f'{k} : {v}\n'
+
+        # вывод информации о файлах и папках
+        # self.ids.text_input_main.text = '\n'.join(files_arr)
+        # self.ids.text_input_main.text = str(existing_permissions)
+        self.ids.text_input_main.text = str(output_str)
+
+        
     # ---------------------------------------------------------------------------
     pass
     # ---------------------------------------------------------------------------
