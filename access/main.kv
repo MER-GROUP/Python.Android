@@ -14,16 +14,55 @@
     ButtonMain:
         id: button_main
         text: 'ВЫПОЛНИТЬ'
-        on_release: root.show_files_dir()
+        # on_release: root.show_files_dir()
     # ----------------------------------------------------------------------  
     # ScrollView - прокрутка текстового виджета
-    ScrollView:
-        id:scroll_view
-        TextInputMain:
-            id: text_input_main
-            size_hint: (None, None)
-            width: scroll_view.width
-            height: max(self.minimum_height, scroll_view.height)
+    # ScrollView:
+    #     id:scroll_view
+    #     TextInputMain:
+    #         id: text_input_main
+    #         size_hint: (None, None)
+    #         width: scroll_view.width
+    #         height: max(self.minimum_height, scroll_view.height)
+    # ---------------------------------------------------------------------- 
+    # ScrollView - прокрутка текста
+    BoxLayout:
+        orientation: 'horizontal'
+        BoxLayout:
+            orientation: 'vertical'
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                Label:
+                    text: ''.join([(str(i) + '\n') for i in range(100)])
+                    color: "white"
+                    # автоматически переносить/растягивать текст
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'top'
+                    # пролистывание текста
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    text_size: self.width, None
+                    padding: 10, 10
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: ''.join([(str(i) + '\n') for i in range(100)])
+                color: "white"
+                # автоматически переносить/растягивать текст
+                text_size: self.size
+                halign: 'left'
+                valign: 'top'
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: ''.join([(str(i) + '\n') for i in range(100)])
+                color: "white"
+                # автоматически переносить/растягивать текст
+                text_size: self.size
+                halign: 'left'
+                valign: 'top'
     # ----------------------------------------------------------------------
     # Для правильного задания размеров,
     # если только имеется один виджет
@@ -58,6 +97,6 @@
     # блокируеи TextInput (True - Да, False - Нет)
     disabled: True
     # параметры текста
-    font_size: dp(25)
+    font_size: dp(15)
     bold: True
 # --------------------------------------------------------------------------
