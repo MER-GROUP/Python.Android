@@ -18,6 +18,8 @@ import os
 from os import listdir
 # импортируем молуль stat (работа с разрешениями прав доступа файлов и папок)
 import stat
+# импорт моей библиотеки по работе с файлами
+from File import File as f
 # *****************************************************************************************
 class Main(BoxLayout):
     # ---------------------------------------------------------------------------
@@ -37,7 +39,7 @@ class Main(BoxLayout):
         # выравниваем текст в files_arr_ljust
         files_arr_ljust = list()
         for i in files_arr:
-            files_arr_ljust.append(i.ljust(delta, '*'))
+            files_arr_ljust.append(i.ljust(delta, ' '))
 
         # массив установленныз разрешений для файлов и папок
         access_arr = list()
@@ -48,10 +50,10 @@ class Main(BoxLayout):
             # Определим установленные разрешения в виде букв -rwx
             # access_arr.append(stat.filemode(os.stat(i).st_mode))
             # Определим установленные разрешения в виде букв -rwx и константных чисел
-            access_arr.append(stat.filemode(os.stat(i).st_mode).ljust(delta, '*') +
+            access_arr.append(stat.filemode(os.stat(i).st_mode).ljust(delta, ' ') +
                                 # ' '.ljust(delta, ' ') +
                                 # ' ' +
-                                str(stat.S_IMODE(os.stat(i).st_mode)).ljust(delta, '*'))
+                                str(stat.S_IMODE(os.stat(i).st_mode)).ljust(delta, ' '))
 
         # Определим установленные разрешения
         # existing_permissions = stat.S_IMODE(os.stat(files_arr[0]).st_mode)

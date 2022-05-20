@@ -5,3 +5,4 @@
 /.buildozer/
 /bin/
 /vibrator/__pycache__/
+/access/__pycache__/
