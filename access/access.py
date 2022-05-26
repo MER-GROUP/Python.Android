@@ -15,8 +15,9 @@ Builder.load_file(join(dirname(__file__), 'main.kv'))
 # импортируем молуль os
 # listdir - файлы в текущей директории
 # chmod - управление правами доступа у файлам и директориям
+# mkdir - создание директории/папки
 import os
-from os import listdir, chmod
+from os import listdir, chmod, mkdir
 # импортируем молуль stat (работа с разрешениями прав доступа файлов и папок)
 import stat
 # импорт моей библиотеки по работе с файлами
@@ -128,7 +129,18 @@ class Main(BoxLayout):
         # test 
         print(file_name) 
         # создать файла
-        f.file_write(f, file_name, list())
+        f.file_write(f, file_name, list())  
+    # ---------------------------------------------------------------------------
+    # создать указанный name dir
+    def create_dir(self, name):
+        # test 
+        print(name) 
+        # определить имя создаваемого файла
+        dir_name = f.file_name_init(f, folder='', filename=str(name))
+        # test 
+        print(dir_name) 
+        # создать папки
+        mkdir(dir_name)
     # ---------------------------------------------------------------------------
     # разрешить весь доступ к указанному файлу
     def access_full(self, name):

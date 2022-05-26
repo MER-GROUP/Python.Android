@@ -26,15 +26,20 @@
     # ---------------------------------------------------------------------- 
     LabelFile:
         id: label_file
-        text: 'ВВЕДИТЕ ИМЯ ФАЙЛА ДЛЯ ИЗМЕНЕНИЯ ПРАВ ДОСТУПА:'
+        text: 'ВВЕДИТЕ ИМЯ ФАЙЛА/ПАПКИ ДЛЯ ИЗМЕНЕНИЯ ПРАВ ДОСТУПА:'
     # ---------------------------------------------------------------------- 
     TextInputFile:
         id: text_input_file
     # ---------------------------------------------------------------------- 
     ButtonMain:
-        id: button_main_create
+        id: button_main_create_file
         text: 'СОЗДАТЬ УКАЗАННЫЙ ФАЙЛ'
         on_release: root.create_file(text_input_file.text)
+    # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_create_dir
+        text: 'СОЗДАТЬ УКАЗАННУЮ ПАПКУ'
+        on_release: root.create_dir(text_input_file.text)
     # ---------------------------------------------------------------------- 
     ButtonMain:
         id: button_main_access_full
