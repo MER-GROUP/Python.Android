@@ -14,8 +14,9 @@ from kivy.lang import Builder
 Builder.load_file(join(dirname(__file__), 'main.kv'))
 # импортируем молуль os
 # listdir - файлы в текущей директории
+# chmod - управление правами доступа у файлам и директориям
 import os
-from os import listdir
+from os import listdir, chmod
 # импортируем молуль stat (работа с разрешениями прав доступа файлов и папок)
 import stat
 # импорт моей библиотеки по работе с файлами
@@ -128,6 +129,24 @@ class Main(BoxLayout):
         print(file_name) 
         # создать файла
         f.file_write(f, file_name, list())
+    # ---------------------------------------------------------------------------
+    # разрешить весь доступ к указанному файлу
+    def access_full(self, name):
+        # определить имя файла
+        file_name = f.file_name_init(f, folder='', filename=str(name))
+        # определяем текущие права файла
+        permissions = os.stat(file_name).st_mode
+        # Convert a file's mode to a string of the form '-rwxrwxrwx'
+        permissions = stat.filemode(permissions)
+        # test out console
+        print(permissions)
+        # задаем новые права доступа к файлу
+        new_permissions = stat.S_IRWXU|stat.S_IRWXG|stat.S_IRWXO
+        chmod(file_name, new_permissions)
+        # test out console
+        permissions = os.stat(file_name).st_mode
+        permissions = stat.filemode(permissions)
+        print(permissions)
     # ---------------------------------------------------------------------------
     pass
     # ---------------------------------------------------------------------------
