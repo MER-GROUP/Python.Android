@@ -31,6 +31,18 @@
     TextInputFile:
         id: text_input_file
     # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_create
+        text: 'СОЗДАТЬ УКАЗАННЫЙ ФАЙЛ'
+    # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_access_full
+        text: 'РАЗРЕШИТЬ ВЕСЬ ДОСТУП К УКАЗАННОМУ ФАЙЛУ'
+    # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_access_not
+        text: 'ЗАПРЕТИТЬ ВЕСЬ ДОСТУП К УКАЗАННОМУ ФАЙЛУ'
+    # ---------------------------------------------------------------------- 
     # ScrollView - прокрутка текста
     BoxLayout:
         orientation: 'horizontal'
@@ -73,7 +85,7 @@
 # ButtonMain - общие свойства кнопокок программы
 <ButtonMain@Button>:
     # параметры текста
-    font_size: dp(20)
+    font_size: dp(15)
     bold: True
     # автоматически переносить/растягивать текст внутри кнопки
     text_size: self.size
@@ -87,16 +99,16 @@
     size_hint: (1.0, 0.1)
 # --------------------------------------------------------------------------
 # TextInputMain - общие свойства текстового поля ввода программы
-<TextInputMain@TextInput>:
-    # многострочный ввод
-    multiline: True
-    # запрет копирования текста
-    allow_copy: False
-    # блокируеи TextInput (True - Да, False - Нет)
-    disabled: True
-    # параметры текста
-    font_size: dp(15)
-    bold: True
+# <TextInputMain@TextInput>:
+#     # многострочный ввод
+#     multiline: True
+#     # запрет копирования текста
+#     allow_copy: False
+#     # блокируеи TextInput (True - Да, False - Нет)
+#     disabled: True
+#     # параметры текста
+#     font_size: dp(15)
+#     bold: True
 # --------------------------------------------------------------------------
 # ScrollViewMain - общие свойства прокрутки текста (этикеток) программы
 <ScrollViewMain@ScrollView>:
@@ -132,6 +144,7 @@
     # размер текста
     font_size: dp(15)
 # --------------------------------------------------------------------------
+# TextInputFile - общие свойства текстового поля ввода ИМЕНИ ФАЙЛА программы
 <TextInputFile@TextInput>:
     # многострочный ввод
     multiline: False
