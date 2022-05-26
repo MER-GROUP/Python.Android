@@ -118,6 +118,17 @@ class Main(BoxLayout):
         # self.ids.text_input_main.text = str(existing_permissions)
         self.ids.text_input_main.text = str(output_str)  
     # ---------------------------------------------------------------------------
+    # создать указанный name file
+    def create_file(self, name):
+        # test 
+        print(name) 
+        # определить имя создаваемого файла
+        file_name = f.file_name_init(f, folder='', filename=str(name))
+        # test 
+        print(file_name) 
+        # создать файла
+        f.file_write(f, file_name, list())
+    # ---------------------------------------------------------------------------
     pass
     # ---------------------------------------------------------------------------
 # *****************************************************************************************
