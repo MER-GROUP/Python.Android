@@ -134,10 +134,13 @@ class Main(BoxLayout):
 
         # массив установленных разрешений для файлов и папок
         access_arr = list()
-        # заполняем массив установленныз разрешений для файлов и папок
+        # заполняем массив установленных разрешений для файлов и папок
         for file in dir_arr:
-            # Определим установленные разрешения в виде букв -rwx
-            access_arr.append(stat.filemode(os.stat(file).st_mode))
+            try:
+                # Определим установленные разрешения в виде букв -rwx
+                access_arr.append(stat.filemode(os.stat(file).st_mode))
+            except (FileNotFoundError):
+                access_arr.append('нет доступа')
         # хранение информации об установленных разрешений для файлов и папок
         output_str = '\n'.join(access_arr)
         # вывод информации об установленных разрешений для файлов и папок
@@ -145,10 +148,13 @@ class Main(BoxLayout):
 
         # массив установленных разрешений для файлов и папок
         access_arr = list()
-        # заполняем массив установленныз разрешений для файлов и папок
+        # заполняем массив установленных разрешений для файлов и папок
         for file in dir_arr:
-            # Определим установленные разрешения в виде константных чисел
-            access_arr.append(str(stat.S_IMODE(os.stat(file).st_mode)))
+            try:
+                # Определим установленные разрешения в виде константных чисел
+                access_arr.append(str(stat.S_IMODE(os.stat(file).st_mode)))
+            except (FileNotFoundError):
+                access_arr.append('нет доступа')
         # хранение информации об установленных разрешений для файлов и папок
         output_str = '\n'.join(access_arr)
         # вывод информации об установленных разрешений для файлов и папок
