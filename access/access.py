@@ -120,6 +120,40 @@ class Main(BoxLayout):
         # self.ids.text_input_main.text = str(existing_permissions)
         self.ids.text_input_main.text = str(output_str)  
     # ---------------------------------------------------------------------------
+    # показать все файлы в указанной директории
+    # отсортировано по возрастанию
+    def show_dir(self, dir):
+        # определить имя создаваемого файла
+        dir_name = f.file_name_init(f, folder='', filename=str(dir))
+        # получаем все файлы и папки в текущей директории и сортируем
+        dir_arr = sorted(listdir(dir_name))
+        # хранение информации о файлах и папках
+        output_str = '\n'.join(dir_arr)
+        # вывод информации о файлах и папках
+        self.ids.label_main_file.text = output_str
+
+        # массив установленных разрешений для файлов и папок
+        access_arr = list()
+        # заполняем массив установленныз разрешений для файлов и папок
+        for file in dir_arr:
+            # Определим установленные разрешения в виде букв -rwx
+            access_arr.append(stat.filemode(os.stat(file).st_mode))
+        # хранение информации об установленных разрешений для файлов и папок
+        output_str = '\n'.join(access_arr)
+        # вывод информации об установленных разрешений для файлов и папок
+        self.ids.label_main_file_access_str.text = output_str
+
+        # массив установленных разрешений для файлов и папок
+        access_arr = list()
+        # заполняем массив установленныз разрешений для файлов и папок
+        for file in dir_arr:
+            # Определим установленные разрешения в виде константных чисел
+            access_arr.append(str(stat.S_IMODE(os.stat(file).st_mode)))
+        # хранение информации об установленных разрешений для файлов и папок
+        output_str = '\n'.join(access_arr)
+        # вывод информации об установленных разрешений для файлов и папок
+        self.ids.label_main_file_access_int.text = output_str
+    # ---------------------------------------------------------------------------
     # создать указанный name file
     def create_file(self, name):
         # test 
