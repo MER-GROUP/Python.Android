@@ -17,16 +17,12 @@
         # on_release: root.show_files_dir_all_option()
         # показать все файлы в текущей директории
         on_release: root.show_files_dir()
+        # показать все установленные права доступа файлов в текущей директории
+        # в виде str (rwx)
         on_release: root.show_files_dir_access_str()
-    # ----------------------------------------------------------------------  
-    # ScrollView - прокрутка текстового виджета
-    # ScrollView:
-    #     id:scroll_view
-    #     TextInputMain:
-    #         id: text_input_main
-    #         size_hint: (None, None)
-    #         width: scroll_view.width
-    #         height: max(self.minimum_height, scroll_view.height)
+        # показать все установленные права доступа файлов в текущей директории
+        # в виде int (777)
+        on_release: root.show_files_dir_access_int()
     # ---------------------------------------------------------------------- 
     # ScrollView - прокрутка текста
     BoxLayout:
@@ -49,6 +45,15 @@
                 LabelMain:
                     id: label_main_file_access_int
                     text: ''.join([(str(i) + '\n') for i in range(100)])
+    # ----------------------------------------------------------------------  
+    # ScrollView - прокрутка текстового виджета
+    # ScrollView:
+    #     id:scroll_view
+    #     TextInputMain:
+    #         id: text_input_main
+    #         size_hint: (None, None)
+    #         width: scroll_view.width
+    #         height: max(self.minimum_height, scroll_view.height)
     # ----------------------------------------------------------------------
     # Для правильного задания размеров,
     # если только имеется один виджет
