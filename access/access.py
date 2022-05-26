@@ -8,7 +8,8 @@ from kivy.uix.boxlayout import BoxLayout
 # импортируем молуль os.path
 # dirname - определяем текущую директорию
 # join - объеденяем директорию + файл (правильный путь файла)
-from os.path import join, dirname
+# abspath - определяет абсолютный путь к файлу
+from os.path import join, dirname, abspath
 # импорт модуля Строитель - загружает .kv файлы в проект
 from kivy.lang import Builder
 Builder.load_file(join(dirname(__file__), 'main.kv'))
@@ -138,7 +139,7 @@ class Main(BoxLayout):
         for file in dir_arr:
             try:
                 # Определим установленные разрешения в виде букв -rwx
-                access_arr.append(stat.filemode(os.stat(file).st_mode))
+                access_arr.append(stat.filemode(os.stat(dir_name + file).st_mode))
             except (FileNotFoundError):
                 access_arr.append('нет доступа')
         # хранение информации об установленных разрешений для файлов и папок
@@ -152,7 +153,7 @@ class Main(BoxLayout):
         for file in dir_arr:
             try:
                 # Определим установленные разрешения в виде константных чисел
-                access_arr.append(str(stat.S_IMODE(os.stat(file).st_mode)))
+                access_arr.append(str(stat.S_IMODE(os.stat(dir_name + file).st_mode)))
             except (FileNotFoundError):
                 access_arr.append('нет доступа')
         # хранение информации об установленных разрешений для файлов и папок
