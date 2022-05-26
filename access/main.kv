@@ -30,39 +30,19 @@
         orientation: 'horizontal'
         BoxLayout:
             orientation: 'vertical'
-            ScrollView:
-                do_scroll_x: False
-                do_scroll_y: True
-                Label:
+            ScrollViewMain:
+                LabelMain:
                     text: ''.join([(str(i) + '\n') for i in range(100)])
-                    color: "white"
-                    # автоматически переносить/растягивать текст
-                    text_size: self.size
-                    halign: 'left'
-                    valign: 'top'
-                    # пролистывание текста
-                    size_hint_y: None
-                    height: self.texture_size[1]
-                    text_size: self.width, None
-                    padding: 10, 10
         BoxLayout:
             orientation: 'vertical'
-            Label:
-                text: ''.join([(str(i) + '\n') for i in range(100)])
-                color: "white"
-                # автоматически переносить/растягивать текст
-                text_size: self.size
-                halign: 'left'
-                valign: 'top'
+            ScrollViewMain:
+                LabelMain:
+                    text: ''.join([(str(i) + '\n') for i in range(100)])
         BoxLayout:
             orientation: 'vertical'
-            Label:
-                text: ''.join([(str(i) + '\n') for i in range(100)])
-                color: "white"
-                # автоматически переносить/растягивать текст
-                text_size: self.size
-                halign: 'left'
-                valign: 'top'
+            ScrollViewMain:
+                LabelMain:
+                    text: ''.join([(str(i) + '\n') for i in range(100)])
     # ----------------------------------------------------------------------
     # Для правильного задания размеров,
     # если только имеется один виджет
@@ -72,7 +52,7 @@
 # --------------------------------------------------------------------------
 # декорируемые классы:
 # --------------------------------------------------------------------------
-# ButtonAccess - общие свойства кнопокок программы Access
+# ButtonMain - общие свойства кнопокок программы
 <ButtonMain@Button>:
     # параметры текста
     font_size: dp(25)
@@ -88,7 +68,7 @@
     # size_hint: (0.3, 0.1)
     size_hint: (1.0, 0.1)
 # --------------------------------------------------------------------------
-# ButtonAccess - общие свойства кнопокок программы Access
+# TextInputMain - общие свойства текста (этикеток) программы
 <TextInputMain@TextInput>:
     # многострочный ввод
     multiline: True
@@ -99,4 +79,23 @@
     # параметры текста
     font_size: dp(15)
     bold: True
+# --------------------------------------------------------------------------
+# ScrollViewMain - общие свойства прокрутки текста (этикеток) программы
+<ScrollViewMain@ScrollView>:
+    do_scroll_x: False
+    do_scroll_y: True
+# --------------------------------------------------------------------------
+# ScrollViewMain - общие свойства прокрутки текста (этикеток) программы
+<LabelMain@Label>:
+    # цвет текста
+    color: "white"
+    # автоматически переносить/растягивать текст
+    text_size: self.size
+    halign: 'left'
+    valign: 'top'
+    # пролистывание текста
+    size_hint_y: None
+    height: self.texture_size[1]
+    text_size: self.width, None
+    padding: 10, 10
 # --------------------------------------------------------------------------
