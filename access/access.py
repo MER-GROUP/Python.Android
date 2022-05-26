@@ -131,7 +131,7 @@ class Main(BoxLayout):
         # создать файла
         f.file_write(f, file_name, list())  
     # ---------------------------------------------------------------------------
-    # создать указанный name dir
+    # создать указанную папку name dir
     def create_dir(self, name):
         # test 
         print(name) 
@@ -139,7 +139,7 @@ class Main(BoxLayout):
         dir_name = f.file_name_init(f, folder='', filename=str(name))
         # test 
         print(dir_name) 
-        # создать папки
+        # создать папку
         mkdir(dir_name)
     # ---------------------------------------------------------------------------
     # разрешить весь доступ к указанному файлу
