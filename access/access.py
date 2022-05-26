@@ -136,6 +136,8 @@ class Main(BoxLayout):
         file_name = f.file_name_init(f, folder='', filename=str(name))
         # определяем текущие права файла
         permissions = os.stat(file_name).st_mode
+        # test out console
+        print(permissions)
         # Convert a file's mode to a string of the form '-rwxrwxrwx'
         permissions = stat.filemode(permissions)
         # test out console
