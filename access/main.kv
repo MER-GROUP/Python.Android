@@ -13,8 +13,77 @@
     # дизайн окна - расположение созданных классов (унаследованных)
     ButtonMain:
         id: button_main
-        text: 'ВЫПОЛНИТЬ'
-        # on_release: root.show_files_dir()
+        text: 'ПОКАЗАТЬ ФАЙЛЫ И ПАПКИ В ТЕКУЩЕЙ ДИРЕКТОРИИ'
+        # on_release: root.show_files_dir_all_option()
+        # показать все файлы в текущей директории
+        on_release: root.show_files_dir()
+        # показать все установленные права доступа файлов в текущей директории
+        # в виде str (rwx)
+        on_release: root.show_files_dir_access_str()
+        # показать все установленные права доступа файлов в текущей директории
+        # в виде int (777)
+        on_release: root.show_files_dir_access_int()
+    # ---------------------------------------------------------------------- 
+    LabelFile:
+        id: label_file
+        text: 'ВВЕДИТЕ ИМЯ ФАЙЛА/ПАПКИ ДЛЯ ИЗМЕНЕНИЯ ПРАВ ДОСТУПА:'
+    # ---------------------------------------------------------------------- 
+    TextInputFile:
+        id: text_input_file
+    # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_create_file
+        text: 'СОЗДАТЬ УКАЗАННЫЙ ФАЙЛ'
+        on_release: root.create_file(text_input_file.text)
+    # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_create_dir
+        text: 'СОЗДАТЬ УКАЗАННУЮ ПАПКУ'
+        on_release: root.create_dir(text_input_file.text)
+    # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_access_full
+        text: 'РАЗРЕШИТЬ ВЕСЬ ДОСТУП К УКАЗАННОМУ ФАЙЛУ'
+        on_release: root.access_full(text_input_file.text)
+    # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_access_not
+        text: 'ЗАПРЕТИТЬ ВЕСЬ ДОСТУП К УКАЗАННОМУ ФАЙЛУ'
+        on_release: root.access_not_full(text_input_file.text)
+    # ---------------------------------------------------------------------- 
+    LabelFile:
+        id: label_file_dir
+        text: 'ВВЕДИТЕ ДИРЕКТОРИЮ ДЛЯ ПОКАЗА ФАЙЛОВ/ПАПОК:'
+    # ---------------------------------------------------------------------- 
+    TextInputFile:
+        id: text_input_dir
+    # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_show_dir
+        text: 'ПОКАЗАТЬ ФАЙЛЫ/ПАПКИ УКАЗАННОЙ ДИРЕКТОРИИ'
+        on_release: root.show_dir(text_input_dir.text)
+    # ---------------------------------------------------------------------- 
+    # ScrollView - прокрутка текста
+    BoxLayout:
+        orientation: 'horizontal'
+        BoxLayout:
+            orientation: 'vertical'
+            ScrollViewMain:
+                LabelMain:
+                    id: label_main_file
+                    text: ''.join([(str(i) + '\n') for i in range(100)])
+        BoxLayout:
+            orientation: 'vertical'
+            ScrollViewMain:
+                LabelMain:
+                    id: label_main_file_access_str
+                    text: ''.join([(str(i) + '\n') for i in range(100)])
+        BoxLayout:
+            orientation: 'vertical'
+            ScrollViewMain:
+                LabelMain:
+                    id: label_main_file_access_int
+                    text: ''.join([(str(i) + '\n') for i in range(100)])
     # ----------------------------------------------------------------------  
     # ScrollView - прокрутка текстового виджета
     # ScrollView:
@@ -24,45 +93,6 @@
     #         size_hint: (None, None)
     #         width: scroll_view.width
     #         height: max(self.minimum_height, scroll_view.height)
-    # ---------------------------------------------------------------------- 
-    # ScrollView - прокрутка текста
-    BoxLayout:
-        orientation: 'horizontal'
-        BoxLayout:
-            orientation: 'vertical'
-            ScrollView:
-                do_scroll_x: False
-                do_scroll_y: True
-                Label:
-                    text: ''.join([(str(i) + '\n') for i in range(100)])
-                    color: "white"
-                    # автоматически переносить/растягивать текст
-                    text_size: self.size
-                    halign: 'left'
-                    valign: 'top'
-                    # пролистывание текста
-                    size_hint_y: None
-                    height: self.texture_size[1]
-                    text_size: self.width, None
-                    padding: 10, 10
-        BoxLayout:
-            orientation: 'vertical'
-            Label:
-                text: ''.join([(str(i) + '\n') for i in range(100)])
-                color: "white"
-                # автоматически переносить/растягивать текст
-                text_size: self.size
-                halign: 'left'
-                valign: 'top'
-        BoxLayout:
-            orientation: 'vertical'
-            Label:
-                text: ''.join([(str(i) + '\n') for i in range(100)])
-                color: "white"
-                # автоматически переносить/растягивать текст
-                text_size: self.size
-                halign: 'left'
-                valign: 'top'
     # ----------------------------------------------------------------------
     # Для правильного задания размеров,
     # если только имеется один виджет
@@ -72,10 +102,10 @@
 # --------------------------------------------------------------------------
 # декорируемые классы:
 # --------------------------------------------------------------------------
-# ButtonAccess - общие свойства кнопокок программы Access
+# ButtonMain - общие свойства кнопокок программы
 <ButtonMain@Button>:
     # параметры текста
-    font_size: dp(25)
+    font_size: dp(14)
     bold: True
     # автоматически переносить/растягивать текст внутри кнопки
     text_size: self.size
@@ -86,17 +116,68 @@
     # pos_hint: {'center_x': 0.5, 'center_y': 0.5}
     # размер кнопки относительно макета
     # size_hint: (0.3, 0.1)
-    size_hint: (1.0, 0.1)
+    size_hint: (1.0, 0.15)
 # --------------------------------------------------------------------------
-# ButtonAccess - общие свойства кнопокок программы Access
-<TextInputMain@TextInput>:
+# TextInputMain - общие свойства текстового поля ввода программы
+# <TextInputMain@TextInput>:
+#     # многострочный ввод
+#     multiline: True
+#     # запрет копирования текста
+#     allow_copy: False
+#     # блокируеи TextInput (True - Да, False - Нет)
+#     disabled: True
+#     # параметры текста
+#     font_size: dp(14)
+#     bold: True
+# --------------------------------------------------------------------------
+# ScrollViewMain - общие свойства прокрутки текста (этикеток) программы
+<ScrollViewMain@ScrollView>:
+    do_scroll_x: False
+    do_scroll_y: True
+# --------------------------------------------------------------------------
+# LabelMain - общие свойства текста (этикеток) программы
+<LabelMain@Label>:
+    # цвет текста
+    color: "white"
+    # автоматически переносить/растягивать текст
+    text_size: self.size
+    halign: 'left'
+    valign: 'top'
+    # пролистывание текста
+    size_hint_y: None
+    height: self.texture_size[1]
+    text_size: self.width, None
+    padding: 10, 10
+# --------------------------------------------------------------------------
+# LabelFile - общие свойства прокрутки текста (этикеток) программы
+<LabelFile@Label>:
+    # цвет текста
+    color: "white"
+    # автоматически переносить/растягивать текст
+    text_size: self.size
+    halign: 'center'
+    valign: 'center'
+    # размер виджета
+    size_hint: (1.0, 0.15)
+    # стиль текста жирный
+    bold: True
+    # размер текста
+    font_size: dp(14)
+# --------------------------------------------------------------------------
+# TextInputFile - общие свойства текстового поля ввода ИМЕНИ ФАЙЛА программы
+<TextInputFile@TextInput>:
     # многострочный ввод
-    multiline: True
+    multiline: False
     # запрет копирования текста
     allow_copy: False
     # блокируеи TextInput (True - Да, False - Нет)
-    disabled: True
+    disabled: False
     # параметры текста
-    font_size: dp(15)
+    # font_size: dp(15) # not work
+    font_size: '15sp'
     bold: True
+    # размер виджета
+    size_hint: (1.0, 0.15)
+    # выравнивание текста по центру
+    halign: 'center'
 # --------------------------------------------------------------------------
