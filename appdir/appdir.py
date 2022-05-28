@@ -37,8 +37,8 @@ class Main(BoxLayout):
             # self.ids.label_main.text = metrics.getDeviceDensity()
 
             # Получение языка установленного в системе
-            lang = autoclass("Local").getDefault().getDisplayLanguage()
-            self.ids.label_main.text = str(lang)
+            # lang = autoclass("Local").getDefault().getDisplayLanguage()
+            # self.ids.label_main.text = str(lang)
 
             # Вибрация телефона
             # Для начала нам нужна ссылка на Java Activity, в которой
