@@ -47,7 +47,7 @@ class Main(BoxLayout):
             # self.ids.label_main.text = 'It is Android'
 
             context = Context()
-            self.ids.label_main.text = str(context.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA))
+            self.ids.label_main.text = '\n'.join([i.loadLabel(context.getPackageManager()).toString() for i in context.getPackageManager().getInstalledApplications(0)])
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
