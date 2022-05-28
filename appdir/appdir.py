@@ -45,7 +45,8 @@ class Main(BoxLayout):
             # self.ids.label_main.text = str(PackageManager.getApplicationInfo().sourceDir)
             # self.ids.label_main.text = 'It is Android'
 
-            self.ids.label_main.text = str(ApplicationInfo.dataDir)
+            package_manager = PackageManager('org.appdir.appdir', 0)
+            self.ids.label_main.text = str(package_manager.getApplicationInfo().sourceDir)
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
