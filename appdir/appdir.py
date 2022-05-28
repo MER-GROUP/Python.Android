@@ -14,9 +14,23 @@ from os.path import join, dirname, abspath
 from kivy.lang import Builder
 Builder.load_file(join(dirname(__file__), 'main.kv'))
 # *****************************************************************************************
+# platform - определение операционки
+from kivy.utils import platform
+if 'android' == platform:
+    # autoclass - импорт java классов
+    from jnius import autoclass
+    package_manager = autoclass('android.content.pm.PackageManager')
+    application_info = autoclass('android.content.pm.ApplicationInfo')
+# *****************************************************************************************
 class Main(BoxLayout):
     # ---------------------------------------------------------------------------
     '''Root Widget'''
+    # ---------------------------------------------------------------------------
+    def shor_prog_dir(self):
+        pass
+    # ---------------------------------------------------------------------------
+    def shor_prog_base(self):
+        pass
     # ---------------------------------------------------------------------------
     pass
     # ---------------------------------------------------------------------------
