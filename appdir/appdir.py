@@ -16,9 +16,9 @@ Builder.load_file(join(dirname(__file__), 'main.kv'))
 # *****************************************************************************************
 # platform - определение операционки
 from kivy.utils import platform
-if 'android' == platform:
+# if 'android' == platform:
     # autoclass - импорт java классов
-    from jnius import autoclass
+    # from jnius import autoclass
     # package_manager = autoclass('android.content.pm.PackageManager')
     # application_info = autoclass('android.content.pm.ApplicationInfo')
 # *****************************************************************************************
@@ -29,6 +29,8 @@ class Main(BoxLayout):
     # показать директорию программы
     def shor_prog_dir(self):
         if 'android' == platform:
+            from jnius import autoclass
+            
             # self.ids.label_main.text = package_manager.getApplicationInfo().dataDir
 
             # определение DPI
