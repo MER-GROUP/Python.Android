@@ -32,13 +32,13 @@ class Main(BoxLayout):
             # self.ids.label_main.text = PackageManager.getApplicationInfo().dataDir
 
             # определение DPI
-            # DisplayMetrics = autoclass('android.util.DisplayMetrics')
-            # metrics = DisplayMetrics()
-            # self.ids.label_main.text = metrics.getDeviceDensity()
+            DisplayMetrics = autoclass('android.util.DisplayMetrics')
+            metrics = DisplayMetrics()
+            self.ids.label_main.text = str(metrics.getDeviceDensity())
 
             # Получение языка установленного в системе
-            lang = autoclass("Local").getDefault().getDisplayLanguage()
-            self.ids.label_main.text = str(lang)
+            # lang = autoclass("Local").getDefault().getDisplayLanguage()
+            # self.ids.label_main.text = str(lang)
 
             # Вибрация телефона
             # Для начала нам нужна ссылка на Java Activity, в которой
