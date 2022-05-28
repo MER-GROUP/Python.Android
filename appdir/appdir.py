@@ -16,11 +16,11 @@ Builder.load_file(join(dirname(__file__), 'main.kv'))
 # *****************************************************************************************
 # platform - определение операционки
 from kivy.utils import platform
-# if 'android' == platform:
+if 'android' == platform:
     # autoclass - импорт java классов
-    # from jnius import autoclass
-    # package_manager = autoclass('android.content.pm.PackageManager')
-    # application_info = autoclass('android.content.pm.ApplicationInfo')
+    from jnius import autoclass
+    # PackageManager = autoclass('android.content.pm.PackageManager')
+    # ApplicationInfo = autoclass('android.content.pm.ApplicationInfo')
 # *****************************************************************************************
 class Main(BoxLayout):
     # ---------------------------------------------------------------------------
@@ -28,10 +28,8 @@ class Main(BoxLayout):
     # ---------------------------------------------------------------------------
     # показать директорию программы
     def shor_prog_dir(self):
-        if 'android' == platform:
-            from jnius import autoclass
-            
-            # self.ids.label_main.text = package_manager.getApplicationInfo().dataDir
+        if 'android' == platform:          
+            # self.ids.label_main.text = PackageManager.getApplicationInfo().dataDir
 
             # определение DPI
             # DisplayMetrics = autoclass('android.util.DisplayMetrics')
@@ -39,24 +37,24 @@ class Main(BoxLayout):
             # self.ids.label_main.text = metrics.getDeviceDensity()
 
             # Получение языка установленного в системе
-            # lang = autoclass("Local").getDefault().getDisplayLanguage()
-            # self.ids.label_main.text = str(lang)
+            lang = autoclass("Local").getDefault().getDisplayLanguage()
+            self.ids.label_main.text = str(lang)
 
             # Вибрация телефона
             # Для начала нам нужна ссылка на Java Activity, в которой
             # запущено приложение, она хранится в загрузчике Kivy PythonActivity
-            PythonActivity = autoclass('org.renpy.android.PythonActivity')
-            activity = PythonActivity.mActivity
-            Context = autoclass('android.content.Context')
-            vibrator = activity.getSystemService(Context.VIBRATOR_SERVICE)
-            vibrator.vibrate(10000)  # аргумент указывается в миллисекундах
+            # PythonActivity = autoclass('org.renpy.android.PythonActivity')
+            # activity = PythonActivity.mActivity
+            # Context = autoclass('android.content.Context')
+            # vibrator = activity.getSystemService(Context.VIBRATOR_SERVICE)
+            # vibrator.vibrate(10000)  # аргумент указывается в миллисекундах
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
     # показать директорию программы base.apk
     def shor_prog_base(self):
         if 'android' == platform:
-            # self.ids.label_main.text = package_manager.getApplicationInfo().sourceDir
+            # self.ids.label_main.text = PackageManager.getApplicationInfo().sourceDir
             self.ids.label_main.text = 'It is Android'
         else:
             self.ids.label_main.text = 'It is not Android'
