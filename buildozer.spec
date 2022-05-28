@@ -1,13 +1,13 @@
 [app]
 
 # (str) Title of your application
-title = Plyer
+title = appdir
 
 # (str) Package name
-package.name = plyer
+package.name = appdir
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.plyer
+package.domain = org.appdir
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -96,7 +96,7 @@ fullscreen = 0
 # (list) Permissions
 #android.permissions = INTERNET
 # android.permissions = VIBRATE
-android.permissions = READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
+# android.permissions = READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
