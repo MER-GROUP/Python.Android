@@ -19,8 +19,8 @@ from kivy.utils import platform
 if 'android' == platform:
     # autoclass - импорт java классов
     from jnius import autoclass
-    package_manager = autoclass('android.content.pm.PackageManager')
-    application_info = autoclass('android.content.pm.ApplicationInfo')
+    # package_manager = autoclass('android.content.pm.PackageManager')
+    # application_info = autoclass('android.content.pm.ApplicationInfo')
 # *****************************************************************************************
 class Main(BoxLayout):
     # ---------------------------------------------------------------------------
@@ -30,10 +30,15 @@ class Main(BoxLayout):
     def shor_prog_dir(self):
         if 'android' == platform:
             # self.ids.label_main.text = package_manager.getApplicationInfo().dataDir
+
             # определение DPI
-            DisplayMetrics = autoclass('android.util.DisplayMetrics')
-            metrics = DisplayMetrics()
-            self.ids.label_main.text = metrics.getDeviceDensity()
+            # DisplayMetrics = autoclass('android.util.DisplayMetrics')
+            # metrics = DisplayMetrics()
+            # self.ids.label_main.text = metrics.getDeviceDensity()
+
+            # Получение языка установленного в системе
+            lang = autoclass("Local").getDefault().getDisplayLanguage()
+            self.ids.label_main.text = lang
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
