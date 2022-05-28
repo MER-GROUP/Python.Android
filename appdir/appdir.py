@@ -29,14 +29,19 @@ class Main(BoxLayout):
     # показать директорию программы
     def shor_prog_dir(self):
         if 'android' == platform:
-            self.ids.label_main.text = package_manager.getApplicationInfo().dataDir
+            # self.ids.label_main.text = package_manager.getApplicationInfo().dataDir
+            
+            DisplayMetrics = autoclass('android.util.DisplayMetrics')
+            metrics = DisplayMetrics()
+            self.ids.label_main.text = metrics.getDeviceDensity()
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
     # показать директорию программы base.apk
     def shor_prog_base(self):
         if 'android' == platform:
-            self.ids.label_main.text = package_manager.getApplicationInfo().sourceDir
+            # self.ids.label_main.text = package_manager.getApplicationInfo().sourceDir
+            self.ids.label_main.text = 'It is Android'
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
