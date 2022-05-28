@@ -26,11 +26,19 @@ class Main(BoxLayout):
     # ---------------------------------------------------------------------------
     '''Root Widget'''
     # ---------------------------------------------------------------------------
+    # показать директорию программы
     def shor_prog_dir(self):
-        pass
+        if 'android' == platform:
+            self.ids.label_main.text = package_manager.getApplicationInfo().dataDir
+        else:
+            self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
+    # показать директорию программы base.apk
     def shor_prog_base(self):
-        pass
+        if 'android' == platform:
+            self.ids.label_main.text = package_manager.getApplicationInfo().sourceDir
+        else:
+            self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
     pass
     # ---------------------------------------------------------------------------
