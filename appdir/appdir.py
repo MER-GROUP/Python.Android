@@ -30,7 +30,7 @@ class Main(BoxLayout):
     def shor_prog_dir(self):
         if 'android' == platform:
             # self.ids.label_main.text = package_manager.getApplicationInfo().dataDir
-            
+            # определение DPI
             DisplayMetrics = autoclass('android.util.DisplayMetrics')
             metrics = DisplayMetrics()
             self.ids.label_main.text = metrics.getDeviceDensity()
