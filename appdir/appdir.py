@@ -29,12 +29,12 @@ class Main(BoxLayout):
     # показать директорию программы
     def shor_prog_dir(self):
         if 'android' == platform:          
-            self.ids.label_main.text = str(PackageManager.getApplicationInfo().dataDir)
+            # self.ids.label_main.text = str(PackageManager.getApplicationInfo().dataDir)
 
             # test - определение DPI
-            # DisplayMetrics = autoclass('android.util.DisplayMetrics')
-            # metrics = DisplayMetrics()
-            # self.ids.label_main.text = str(metrics.getDeviceDensity())
+            DisplayMetrics = autoclass('android.util.DisplayMetrics')
+            metrics = DisplayMetrics()
+            self.ids.label_main.text = str(metrics.getDeviceDensity())
 
         else:
             self.ids.label_main.text = 'It is not Android'
@@ -42,8 +42,10 @@ class Main(BoxLayout):
     # показать директорию программы base.apk
     def shor_prog_base(self):
         if 'android' == platform:
-            self.ids.label_main.text = str(PackageManager.getApplicationInfo().sourceDir)
-            self.ids.label_main.text = 'It is Android'
+            # self.ids.label_main.text = str(PackageManager.getApplicationInfo().sourceDir)
+            # self.ids.label_main.text = 'It is Android'
+
+            self.ids.label_main.text = str(ApplicationInfo.dataDir)
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
