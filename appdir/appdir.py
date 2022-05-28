@@ -19,8 +19,8 @@ from kivy.utils import platform
 if 'android' == platform:
     # autoclass - импорт java классов
     from jnius import autoclass
-    # PackageManager = autoclass('android.content.pm.PackageManager')
-    # ApplicationInfo = autoclass('android.content.pm.ApplicationInfo')
+    PackageManager = autoclass('android.content.pm.PackageManager')
+    ApplicationInfo = autoclass('android.content.pm.ApplicationInfo')
 # *****************************************************************************************
 class Main(BoxLayout):
     # ---------------------------------------------------------------------------
@@ -29,16 +29,12 @@ class Main(BoxLayout):
     # показать директорию программы
     def shor_prog_dir(self):
         if 'android' == platform:          
-            # self.ids.label_main.text = PackageManager.getApplicationInfo().dataDir
+            self.ids.label_main.text = str(PackageManager.getApplicationInfo().dataDir)
 
-            # определение DPI
+            # test - определение DPI
             # DisplayMetrics = autoclass('android.util.DisplayMetrics')
             # metrics = DisplayMetrics()
             # self.ids.label_main.text = str(metrics.getDeviceDensity())
-
-            # Получение языка установленного в системе
-            lang = autoclass("Local").getDefault().getDisplayLanguage()
-            self.ids.label_main.text = str(lang)
 
         else:
             self.ids.label_main.text = 'It is not Android'
@@ -46,7 +42,7 @@ class Main(BoxLayout):
     # показать директорию программы base.apk
     def shor_prog_base(self):
         if 'android' == platform:
-            # self.ids.label_main.text = PackageManager.getApplicationInfo().sourceDir
+            self.ids.label_main.text = str(PackageManager.getApplicationInfo().sourceDir)
             self.ids.label_main.text = 'It is Android'
         else:
             self.ids.label_main.text = 'It is not Android'
