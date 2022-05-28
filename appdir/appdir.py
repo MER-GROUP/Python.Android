@@ -39,6 +39,15 @@ class Main(BoxLayout):
             # Получение языка установленного в системе
             lang = autoclass("Local").getDefault().getDisplayLanguage()
             self.ids.label_main.text = str(lang)
+
+            # Вибрация телефона
+            # Для начала нам нужна ссылка на Java Activity, в которой
+            # запущено приложение, она хранится в загрузчике Kivy PythonActivity
+            PythonActivity = autoclass('org.renpy.android.PythonActivity')
+            activity = PythonActivity.mActivity
+            Context = autoclass('android.content.Context')
+            vibrator = activity.getSystemService(Context.VIBRATOR_SERVICE)
+            vibrator.vibrate(10000)  # аргумент указывается в миллисекундах
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
