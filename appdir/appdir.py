@@ -38,7 +38,7 @@ class Main(BoxLayout):
 
             # Получение языка установленного в системе
             lang = autoclass("Local").getDefault().getDisplayLanguage()
-            self.ids.label_main.text = lang
+            self.ids.label_main.text = str(lang)
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
