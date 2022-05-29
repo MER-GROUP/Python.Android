@@ -73,7 +73,6 @@ class Main(BoxLayout):
                 #
                 # Верните полный путь к основному пакету Android этого контекста.
                 self.ids.label_main.text = str(
-                    # Context.getApplicationInfo().getMemtagMode()
                     Context.getPackageCodePath()
                     )
             except JavaException as e:
