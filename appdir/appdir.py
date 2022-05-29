@@ -30,10 +30,26 @@ class Main(BoxLayout):
     # показать директорию программы
     def shor_prog_dir(self):
         if 'android' == platform:          
-            # test - определение DPI
-            DisplayMetrics = autoclass('android.util.DisplayMetrics')
-            metrics = DisplayMetrics()
-            self.ids.label_main.text = str(metrics.getDeviceDensity())
+            # # test - определение DPI
+            # DisplayMetrics = autoclass('android.util.DisplayMetrics')
+            # metrics = DisplayMetrics()
+            # self.ids.label_main.text = str(metrics.getDeviceDensity())
+
+            # test-3
+            try:
+                # Context = autoclass('android.content.Context')
+                # context = Context() - not work
+                #
+                # Returns the absolute path to the directory on the filesystem 
+                # where all private files belonging to this app are stored.
+                #
+                # Возвращает абсолютный путь к каталогу в файловой системе, 
+                # где хранятся все личные файлы, принадлежащие этому приложению.
+                self.ids.label_main.text = str(
+                    Context.getDataDir().getAbsolutePath()
+                    )
+            except JavaException as e:
+                self.ids.label_main.text = 'JavaException: ' + str(e)
 
         else:
             self.ids.label_main.text = 'It is not Android'
