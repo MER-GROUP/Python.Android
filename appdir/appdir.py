@@ -52,7 +52,7 @@ class Main(BoxLayout):
                 context = Context()
                 self.ids.label_main.text = context.getPackageManager().getApplicationInfo().getMemtagMode()
             except exception:
-                self.ids.label_main.text = exception
+                self.ids.label_main.text = str(exception)
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
