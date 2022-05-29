@@ -70,7 +70,8 @@ class Main(BoxLayout):
                 # context = Context() - not work
 
                 self.ids.label_main.text = str(
-                    Context.getApplicationInfo().getMemtagMode()
+                    # Context.getApplicationInfo().getMemtagMode()
+                    Context.getPackageCodePath()
                     )
             except JavaException as e:
                 self.ids.label_main.text = 'JavaException: ' + str(e)
