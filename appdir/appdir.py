@@ -18,7 +18,7 @@ Builder.load_file(join(dirname(__file__), 'main.kv'))
 from kivy.utils import platform
 if 'android' == platform:
     # autoclass - импорт java классов
-    from jnius import autoclass
+    from jnius import autoclass, JavaException
     Context = autoclass('android.content.Context')
     PackageManager = autoclass('android.content.pm.PackageManager')
     ApplicationInfo = autoclass('android.content.pm.ApplicationInfo')
@@ -48,13 +48,12 @@ class Main(BoxLayout):
             
             # test
             try:
-                Context = autoclass('android.content.Context')
                 context = Context()
                 self.ids.label_main.text = str(
                     context.getPackageManager()
                     )
-            except BaseException as e:
-                self.ids.label_main.text = str(e)
+            except JavaException as e:
+                self.ids.label_main.text = 'JavaException: ' + str(e)
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
