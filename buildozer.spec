@@ -1,13 +1,13 @@
 [app]
 
 # (str) Title of your application
-title = Plyer
+title = appdir
 
 # (str) Package name
-package.name = plyer
+package.name = appdir
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.plyer
+package.domain = org.appdir
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -38,6 +38,7 @@ version = 0.1
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
 # requirements = python3==3.9.2,hostpython3==3.9.2,kivy,plyer
+# jnius - is install default
 requirements = python3==3.9.2,hostpython3==3.9.2,kivy
 
 # (str) Custom source folders for requirements
@@ -96,7 +97,7 @@ fullscreen = 0
 # (list) Permissions
 #android.permissions = INTERNET
 # android.permissions = VIBRATE
-android.permissions = READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
+# android.permissions = READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
