@@ -30,8 +30,6 @@ class Main(BoxLayout):
     # показать директорию программы
     def shor_prog_dir(self):
         if 'android' == platform:          
-            # self.ids.label_main.text = str(PackageManager.getApplicationInfo().dataDir)
-
             # test - определение DPI
             DisplayMetrics = autoclass('android.util.DisplayMetrics')
             metrics = DisplayMetrics()
