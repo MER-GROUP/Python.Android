@@ -50,7 +50,9 @@ class Main(BoxLayout):
             # test
             try:
                 context = Context()
-                self.ids.label_main.text = context.getPackageManager().getApplicationInfo().getMemtagMode()
+                self.ids.label_main.text = str(
+                    context.getPackageManager().getApplicationInfo().getMemtagMode()
+                    )
             except exception:
                 self.ids.label_main.text = str(exception)
         else:
