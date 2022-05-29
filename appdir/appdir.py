@@ -41,7 +41,6 @@ class Main(BoxLayout):
     # показать директорию программы base.apk
     def shor_prog_base(self):
         if 'android' == platform:
-            # self.ids.label_main.text = str(PackageManager.getApplicationInfo().sourceDir)
             # self.ids.label_main.text = 'It is Android'
             
             # # test-1
