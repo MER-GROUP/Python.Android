@@ -48,9 +48,9 @@ class Main(BoxLayout):
             
             # test
             try:
-                context = Context()
+                # context = Context()
                 self.ids.label_main.text = str(
-                    context.getPackageManager()
+                    Context.getExternalFilesDir(None).getAbsolutePath()
                     )
             except JavaException as e:
                 self.ids.label_main.text = 'JavaException: ' + str(e)
