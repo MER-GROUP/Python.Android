@@ -1,5 +1,6 @@
 # *****************************************************************************************
 # главное окно программы
+from logging import exception
 from kivy.app import App
 # коробочный макет
 from kivy.uix.boxlayout import BoxLayout
@@ -45,9 +46,13 @@ class Main(BoxLayout):
         if 'android' == platform:
             # self.ids.label_main.text = str(PackageManager.getApplicationInfo().sourceDir)
             # self.ids.label_main.text = 'It is Android'
-
-            context = Context()
-            self.ids.label_main.text = '\n'.join([i.loadLabel(context.getPackageManager()).toString() for i in context.getPackageManager().getInstalledApplications(0)])
+            
+            # test
+            try:
+                context = Context()
+                self.ids.label_main.text = context.getPackageManager().getApplicationInfo().getMemtagMode()
+            except exception:
+                self.ids.label_main.text = exception
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
