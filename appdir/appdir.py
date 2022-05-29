@@ -1,6 +1,5 @@
 # *****************************************************************************************
 # главное окно программы
-from logging import exception
 from kivy.app import App
 # коробочный макет
 from kivy.uix.boxlayout import BoxLayout
@@ -53,7 +52,7 @@ class Main(BoxLayout):
                 self.ids.label_main.text = str(
                     context.getPackageManager().getApplicationInfo().getMemtagMode()
                     )
-            except exception as e:
+            except Exception as e:
                 self.ids.label_main.text = str(e)
         else:
             self.ids.label_main.text = 'It is not Android'
