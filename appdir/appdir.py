@@ -18,7 +18,7 @@ Builder.load_file(join(dirname(__file__), 'main.kv'))
 from kivy.utils import platform
 if 'android' == platform:
     # autoclass - импорт java классов
-    from jnius import autoclass
+    from jnius import autoclass, JavaException
     Context = autoclass('android.content.Context')
     PackageManager = autoclass('android.content.pm.PackageManager')
     ApplicationInfo = autoclass('android.content.pm.ApplicationInfo')
@@ -30,12 +30,26 @@ class Main(BoxLayout):
     # показать директорию программы
     def shor_prog_dir(self):
         if 'android' == platform:          
-            # self.ids.label_main.text = str(PackageManager.getApplicationInfo().dataDir)
+            # # test - определение DPI
+            # DisplayMetrics = autoclass('android.util.DisplayMetrics')
+            # metrics = DisplayMetrics()
+            # self.ids.label_main.text = str(metrics.getDeviceDensity())
 
-            # test - определение DPI
-            DisplayMetrics = autoclass('android.util.DisplayMetrics')
-            metrics = DisplayMetrics()
-            self.ids.label_main.text = str(metrics.getDeviceDensity())
+            # test-3
+            try:
+                # Context = autoclass('android.content.Context')
+                # context = Context() - not work
+                #
+                # Returns the absolute path to the directory on the filesystem 
+                # where all private files belonging to this app are stored.
+                #
+                # Возвращает абсолютный путь к каталогу в файловой системе, 
+                # где хранятся все личные файлы, принадлежащие этому приложению.
+                self.ids.label_main.text = str(
+                    Context.getDataDir().getAbsolutePath()
+                    )
+            except JavaException as e:
+                self.ids.label_main.text = 'JavaException: ' + str(e)
 
         else:
             self.ids.label_main.text = 'It is not Android'
@@ -43,11 +57,39 @@ class Main(BoxLayout):
     # показать директорию программы base.apk
     def shor_prog_base(self):
         if 'android' == platform:
-            # self.ids.label_main.text = str(PackageManager.getApplicationInfo().sourceDir)
             # self.ids.label_main.text = 'It is Android'
+            
+            # # test-1
+            # try:
+            #     # Context = autoclass('android.content.Context')
+            #     # context = Context() - not work
+            #     #
+            #     # Returns absolute path to application-specific directory 
+            #     # on the primary shared/external storage device where 
+            #     # the application can place cache files it owns.
+            #     #
+            #     # Возвращает абсолютный путь к определенному для приложения 
+            #     # каталогу на основном общем/внешнем устройстве хранения, 
+            #     # где приложение может размещать принадлежащие ему файлы кэша.
+            #     self.ids.label_main.text = str(
+            #         Context.getExternalFilesDir(None).getAbsolutePath()
+            #         )
+            # except JavaException as e:
+            #     self.ids.label_main.text = 'JavaException: ' + str(e)
 
-            context = Context()
-            self.ids.label_main.text = '\n'.join([i.loadLabel(context.getPackageManager()).toString() for i in context.getPackageManager().getInstalledApplications(0)])
+            # test-2
+            try:
+                # Context = autoclass('android.content.Context')
+                # context = Context() - not work
+                #
+                # Return the full path to this context's primary Android package.
+                #
+                # Верните полный путь к основному пакету Android этого контекста.
+                self.ids.label_main.text = str(
+                    Context.getPackageCodePath()
+                    )
+            except JavaException as e:
+                self.ids.label_main.text = 'JavaException: ' + str(e)
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
