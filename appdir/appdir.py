@@ -68,7 +68,10 @@ class Main(BoxLayout):
             try:
                 # Context = autoclass('android.content.Context')
                 # context = Context() - not work
-
+                #
+                # Return the full path to this context's primary Android package.
+                #
+                # Верните полный путь к основному пакету Android этого контекста.
                 self.ids.label_main.text = str(
                     # Context.getApplicationInfo().getMemtagMode()
                     Context.getPackageCodePath()
