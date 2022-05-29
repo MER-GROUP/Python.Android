@@ -50,7 +50,8 @@ class Main(BoxLayout):
             try:
                 context = Context()
                 self.ids.label_main.text = str(
-                    context.getPackageManager().getApplicationInfo().getMemtagMode()
+                    # context.getPackageManager().getApplicationInfo().getMemtagMode()
+                    autoclass('android.util.DisplayMetrics').DisplayMetrics().getDeviceDensity()
                     )
             except BaseException as e:
                 self.ids.label_main.text = str(e)
