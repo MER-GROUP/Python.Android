@@ -46,11 +46,31 @@ class Main(BoxLayout):
             # self.ids.label_main.text = str(PackageManager.getApplicationInfo().sourceDir)
             # self.ids.label_main.text = 'It is Android'
             
-            # test
+            # # test-1
+            # try:
+            #     # Context = autoclass('android.content.Context')
+            #     # context = Context() - not work
+            #     #
+            #     # Returns absolute path to application-specific directory 
+            #     # on the primary shared/external storage device where 
+            #     # the application can place cache files it owns.
+            #     #
+            #     # Возвращает абсолютный путь к определенному для приложения 
+            #     # каталогу на основном общем/внешнем устройстве хранения, 
+            #     # где приложение может размещать принадлежащие ему файлы кэша.
+            #     self.ids.label_main.text = str(
+            #         Context.getExternalFilesDir(None).getAbsolutePath()
+            #         )
+            # except JavaException as e:
+            #     self.ids.label_main.text = 'JavaException: ' + str(e)
+
+            # test-2
             try:
-                # context = Context()
+                # Context = autoclass('android.content.Context')
+                # context = Context() - not work
+
                 self.ids.label_main.text = str(
-                    Context.getExternalFilesDir(None).getAbsolutePath()
+                    Context.getApplicationInfo().getMemtagMode()
                     )
             except JavaException as e:
                 self.ids.label_main.text = 'JavaException: ' + str(e)
