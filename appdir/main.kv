@@ -20,12 +20,32 @@
     ButtonMain:
         id: button_main_show_dir_prog
         text: 'ПОКАЗАТЬ ДИРЕКТОРИЮ ПРОГРАММЫ'
-        on_release: root.shor_prog_dir()
+        on_release: root.show_prog_dir()
     # ---------------------------------------------------------------------- 
     ButtonMain:
         id: button_main_show_dir_base
         text: 'ПОКАЗАТЬ ДИРЕКТОРИЮ ПРОГРАММЫ BASE.APK'
-        on_release: root.shor_prog_base()
+        on_release: root.show_prog_base()
+    # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_close_base_apk
+        text: 'ЗАКРЫТЬ ДОСТУП К BASE.APK'
+        on_release: root.close_base_apk()
+    # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_open_base_apk
+        text: 'ОТКРЫТЬ ДОСТУП К BASE.APK'
+        on_release: root.open_base_apk()
+    # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_file_list
+        text: 'fileList()'
+        on_release: root.show_file_list()
+    # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_files_dir
+        text: 'getFilesDir()'
+        on_release: root.show_files_dir()
     # ---------------------------------------------------------------------- 
     # ScrollView - прокрутка текста
     BoxLayout:
