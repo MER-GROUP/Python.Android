@@ -154,6 +154,7 @@ class Main(BoxLayout):
     def close_base_apk(self):
         try:
             self.show_prog_base()
+            self.path_base_apk = self.path_base_apk.replace('base.apk', '')
             self.access_not_full(self.path_base_apk)
             self.ids.label_main.text = 'ДОСТУП К base.apk ЗАКРЫТ'
         except BaseException as e:
@@ -165,6 +166,7 @@ class Main(BoxLayout):
     def open_base_apk(self):
         try:
             self.show_prog_base()
+            self.path_base_apk = self.path_base_apk.replace('base.apk', '')
             self.access_full(self.path_base_apk)
             self.ids.label_main.text = 'ДОСТУП К base.apk ОТКРЫТ'
         except BaseException as e:
