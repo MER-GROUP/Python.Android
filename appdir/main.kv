@@ -39,8 +39,13 @@
     # ---------------------------------------------------------------------- 
     ButtonMain:
         id: button_main_file_list
-        text: 'ПОКАЗАТЬ ПРИВАТНЫЙ ФАЙЛЫ ПРОГРАММЫ'
+        text: 'fileList()'
         on_release: root.show_file_list()
+    # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_files_dir
+        text: 'getFilesDir()'
+        on_release: root.show_files_dir()
     # ---------------------------------------------------------------------- 
     # ScrollView - прокрутка текста
     BoxLayout:

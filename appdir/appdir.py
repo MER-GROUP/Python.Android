@@ -184,6 +184,18 @@ class Main(BoxLayout):
         except JavaException as e:
             self.ids.label_main.text = 'ОШИБКА: ' + str(e)
     # ---------------------------------------------------------------------------
+    # Returns the absolute path to the directory on the filesystem where files 
+    # created with openFileOutput(String, int) are stored.
+    # Возвращает абсолютный путь к каталогу в файловой системе, в котором 
+    # хранятся файлы, созданные с помощью openFileOutput(String, int).
+    def show_files_dir(self):
+        try:
+            self.ids.label_main.text = str(Context.getFilesDir().getAbsolutePath())
+        except BaseException as e:
+            self.ids.label_main.text = 'ОШИБКА: ' + str(e)
+        except JavaException as e:
+            self.ids.label_main.text = 'ОШИБКА: ' + str(e)
+    # ---------------------------------------------------------------------------
     pass
     # ---------------------------------------------------------------------------
 # *****************************************************************************************
