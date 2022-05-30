@@ -27,7 +27,7 @@ import stat
 from kivy.utils import platform
 if 'android' == platform:
     # ---------------------------------------------------------------------------
-    # permissions
+    # permissions - права доступа
     from android.permissions import Permission, request_permissions, check_permission
 
     def check_permissions(perms):
