@@ -28,7 +28,7 @@ class Main(BoxLayout):
     '''Root Widget'''
     # ---------------------------------------------------------------------------
     # показать директорию программы
-    def shor_prog_dir(self):
+    def show_prog_dir(self):
         if 'android' == platform:          
             # # test - определение DPI
             # DisplayMetrics = autoclass('android.util.DisplayMetrics')
@@ -55,7 +55,7 @@ class Main(BoxLayout):
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
     # показать директорию программы base.apk
-    def shor_prog_base(self):
+    def show_prog_base(self):
         if 'android' == platform:
             # self.ids.label_main.text = 'It is Android'
             
