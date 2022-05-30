@@ -52,6 +52,9 @@ class Main(BoxLayout):
     # ---------------------------------------------------------------------------
     '''Root Widget'''
     # ---------------------------------------------------------------------------
+    # variable
+    path_base_apk = str()
+    # ---------------------------------------------------------------------------
     # показать директорию программы
     def show_prog_dir(self):
         if 'android' == platform:          
@@ -113,6 +116,7 @@ class Main(BoxLayout):
                 self.ids.label_main.text = str(
                     Context.getPackageCodePath()
                     )
+                self.path_base_apk = str(Context.getPackageCodePath())
             except JavaException as e:
                 self.ids.label_main.text = 'JavaException: ' + str(e)
         else:
@@ -145,6 +149,24 @@ class Main(BoxLayout):
         # задаем новые права доступа к файлу
         new_permissions = stat.S_ENFMT
         chmod(file_name, new_permissions)
+    # ---------------------------------------------------------------------------
+    # закрыть доступ к base.apk
+    def close_base_apk(self):
+        try:
+            self.show_prog_base()
+            self.access_not_full(self.path_base_apk)
+            self.ids.label_main.text = 'ДОСТУП К base.apk ЗАКРЫТ'
+        except (BaseException, JavaException):
+            self.ids.label_main.text = 'НЕТ ДОСТУПА'
+    # ---------------------------------------------------------------------------
+    # открыть доступ к base.apk
+    def open_base_apk(self):
+        try:
+            self.show_prog_base()
+            self.access_full(self.path_base_apk)
+            self.ids.label_main.text = 'ДОСТУП К base.apk ОТКРЫТ'
+        except (BaseException, JavaException):
+            self.ids.label_main.text = 'НЕТ ДОСТУПА'
     # ---------------------------------------------------------------------------
     pass
     # ---------------------------------------------------------------------------
