@@ -156,8 +156,10 @@ class Main(BoxLayout):
             self.show_prog_base()
             self.access_not_full(self.path_base_apk)
             self.ids.label_main.text = 'ДОСТУП К base.apk ЗАКРЫТ'
-        except (BaseException, JavaException):
-            self.ids.label_main.text = 'НЕТ ДОСТУПА'
+        except BaseException as e:
+            self.ids.label_main.text = 'НЕТ ДОСТУПА: ' + str(e)
+        except JavaException as e:
+            self.ids.label_main.text = 'НЕТ ДОСТУПА: ' + str(e)
     # ---------------------------------------------------------------------------
     # открыть доступ к base.apk
     def open_base_apk(self):
@@ -165,8 +167,22 @@ class Main(BoxLayout):
             self.show_prog_base()
             self.access_full(self.path_base_apk)
             self.ids.label_main.text = 'ДОСТУП К base.apk ОТКРЫТ'
-        except (BaseException, JavaException):
-            self.ids.label_main.text = 'НЕТ ДОСТУПА'
+        except BaseException as e:
+            self.ids.label_main.text = 'НЕТ ДОСТУПА: ' + str(e)
+        except JavaException as e:
+            self.ids.label_main.text = 'НЕТ ДОСТУПА: ' + str(e)
+    # ---------------------------------------------------------------------------
+    # Returns an array of strings naming the private files associated 
+    # with this Context's application package.
+    # Возвращает массив строк, именующих личные файлы, 
+    # связанные с пакетом приложений этого контекста.
+    def show_file_list(self):
+        try:
+            self.ids.label_main.text = '\n'.join(Context.fileList())
+        except BaseException as e:
+            self.ids.label_main.text = 'ОШИБКА: ' + str(e)
+        except JavaException as e:
+            self.ids.label_main.text = 'ОШИБКА: ' + str(e)
     # ---------------------------------------------------------------------------
     pass
     # ---------------------------------------------------------------------------
