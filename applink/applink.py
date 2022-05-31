@@ -73,8 +73,8 @@ class Main(BoxLayout):
     def get_SDK_INT(self):
         if 'android' == platform:
             try:
-                Build = autoclass('android.os.Build')
-                # import android.os.Build.VERSION as VERSION
+                # Build = autoclass('android.os.Build')
+                import android.os.Build as Build
                 self.ids.label_main.text = str(
                     Build.VERSION.SDK_INT
                     )
