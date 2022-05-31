@@ -7,7 +7,7 @@ title = linkdir
 package.name = linkdir
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.linkdir.com
+package.domain = org.linkdir
 
 # (str) Source code where the main.py live
 source.dir = .
