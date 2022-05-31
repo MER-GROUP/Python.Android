@@ -46,6 +46,7 @@ if 'android' == platform:
     Context = autoclass('android.content.Context')
     PackageManager = autoclass('android.content.pm.PackageManager')
     ApplicationInfo = autoclass('android.content.pm.ApplicationInfo')
+    VERSION = autoclass('android.os.Build.VERSION')
     # ---------------------------------------------------------------------------
 # *****************************************************************************************
 class Main(BoxLayout):
@@ -61,6 +62,20 @@ class Main(BoxLayout):
             try:
                 self.ids.label_main.text = str(
                     Context.getPackageName()
+                    )
+            except BaseException as e:
+                self.ids.label_main.text = 'BaseException: ' + str(e)
+            except JavaException as e:
+                self.ids.label_main.text = 'JavaException: ' + str(e)
+        else:
+            self.ids.label_main.text = 'It is not Android'
+    # ---------------------------------------------------------------------------
+    # The SDK version of the software currently running on this hardware device.
+    def get_SDK_INT(self):
+        if 'android' == platform:
+            try:
+                self.ids.label_main.text = str(
+                    VERSION.SDK_INT
                     )
             except BaseException as e:
                 self.ids.label_main.text = 'BaseException: ' + str(e)
