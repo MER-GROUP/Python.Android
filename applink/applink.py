@@ -77,7 +77,7 @@ class Main(BoxLayout):
                 Build = Build_()
                 # import android.os.Build as Build
                 self.ids.label_main.text = str(
-                    Build.VERSION.SDK_INT
+                    Build().VERSION.SDK_INT
                     )
             except BaseException as e:
                 self.ids.label_main.text = 'BaseException: ' + str(e)
