@@ -1,13 +1,13 @@
 [app]
 
 # (str) Title of your application
-title = appdir
+title = linkdir
 
 # (str) Package name
-package.name = appdir
+package.name = linkdir
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.appdir
+package.domain = org.linkdir.com
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -97,7 +97,7 @@ fullscreen = 0
 # (list) Permissions
 #android.permissions = INTERNET
 # android.permissions = VIBRATE
-android.permissions = READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
+# android.permissions = READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
