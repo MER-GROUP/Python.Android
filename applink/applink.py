@@ -73,10 +73,10 @@ class Main(BoxLayout):
     def get_SDK_INT(self):
         if 'android' == platform:
             try:
-                # VERSION = autoclass('android.os.Build.VERSION')
-                import android.os.Build.VERSION as VERSION
+                Build = autoclass('android.os.Build')
+                # import android.os.Build.VERSION as VERSION
                 self.ids.label_main.text = str(
-                    VERSION.SDK_INT
+                    Build.VERSION.SDK_INT
                     )
             except BaseException as e:
                 self.ids.label_main.text = 'BaseException: ' + str(e)
