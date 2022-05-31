@@ -46,7 +46,6 @@ if 'android' == platform:
     Context = autoclass('android.content.Context')
     PackageManager = autoclass('android.content.pm.PackageManager')
     ApplicationInfo = autoclass('android.content.pm.ApplicationInfo')
-    VERSION = autoclass('android.os.Build.VERSION')
     # ---------------------------------------------------------------------------
 # *****************************************************************************************
 class Main(BoxLayout):
@@ -74,6 +73,7 @@ class Main(BoxLayout):
     def get_SDK_INT(self):
         if 'android' == platform:
             try:
+                VERSION = autoclass('android.os.Build.VERSION')
                 self.ids.label_main.text = str(
                     VERSION.SDK_INT
                     )
