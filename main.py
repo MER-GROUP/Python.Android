@@ -3,7 +3,8 @@ from kivy.app import App
 # from vibrator.vibrator_v2 import VibrationApp
 # from vibrator.vibrator_v3 import VibrationApp
 # from access.access import AccessApp
-from appdir.appdir import DirApp
+# from appdir.appdir import DirApp
+from applink.applink import LinkApp
 
 # VibrationApp().run()
-DirApp().run()
+LinkApp().run()
