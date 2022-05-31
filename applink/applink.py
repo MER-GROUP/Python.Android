@@ -55,14 +55,13 @@ class Main(BoxLayout):
     # variable
     pass
     # ---------------------------------------------------------------------------
-    # показать директорию программы base.apk
-    def show_prog_base(self):
+    # Return the name of this application's package.
+    def getPackageName(self):
         if 'android' == platform:
             try:
                 self.ids.label_main.text = str(
-                    Context.getPackageCodePath()
+                    Context.getPackageName()
                     )
-                self.path_base_apk = str(Context.getPackageCodePath())
             except BaseException as e:
                 self.ids.label_main.text = 'BaseException: ' + str(e)
             except JavaException as e:
