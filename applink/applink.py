@@ -85,6 +85,29 @@ class Main(BoxLayout):
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
+    # Retrieve the package name of the application that installed a package. 
+    # This identifies which market the package came from.
+    # Извлеките имя пакета приложения, установившего пакет. 
+    # Это позволяет определить, с какого рынка поступила посылка.
+    # This method was deprecated in API level 30.
+    # use getInstallSourceInfo(java.lang.String) instead
+    def getInstallerPackageName(self):
+        if 'android' == platform:
+            try:
+                Context = autoclass('android.content.Context')
+                # 
+                self.ids.label_main.text = str(
+                    Context.getPackageManager().getInstallerPackageName(
+                        str(Context.getPackageName())
+                    )
+                    )
+            except BaseException as e:
+                self.ids.label_main.text = 'BaseException: ' + str(e)
+            except JavaException as e:
+                self.ids.label_main.text = 'JavaException: ' + str(e)
+        else:
+            self.ids.label_main.text = 'It is not Android'
+    # ---------------------------------------------------------------------------
     pass
     # ---------------------------------------------------------------------------
 # *****************************************************************************************
