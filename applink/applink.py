@@ -108,7 +108,7 @@ class Main(BoxLayout):
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
-    # 
+    # The name of the package that requested the installation, or null if not available.
     def getInitiatingPackageName(self):
         if 'android' == platform:
             try:
