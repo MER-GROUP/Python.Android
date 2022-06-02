@@ -109,6 +109,7 @@ class Main(BoxLayout):
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
     # The name of the package that requested the installation, or null if not available.
+    # getInstallSourceInfo() - added in API level 30
     def getInitiatingPackageName(self):
         if 'android' == platform:
             try:
