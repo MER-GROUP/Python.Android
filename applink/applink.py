@@ -108,6 +108,24 @@ class Main(BoxLayout):
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
+    # 
+    def getInitiatingPackageName(self):
+        if 'android' == platform:
+            try:
+                Context = autoclass('android.content.Context')
+                # 
+                self.ids.label_main.text = str(
+                    Context.getPackageManager().getInstallSourceInfo(
+                        str(Context.getPackageName())
+                    ).getInitiatingPackageName()
+                    )
+            except BaseException as e:
+                self.ids.label_main.text = 'BaseException: ' + str(e)
+            except JavaException as e:
+                self.ids.label_main.text = 'JavaException: ' + str(e)
+        else:
+            self.ids.label_main.text = 'It is not Android'
+    # ---------------------------------------------------------------------------
     pass
     # ---------------------------------------------------------------------------
 # *****************************************************************************************
