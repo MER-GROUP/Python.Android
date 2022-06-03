@@ -77,12 +77,12 @@ class Main(BoxLayout):
     # ---------------------------------------------------------------------------
     # создать файл в директории /storage/emulated/0/Download/
     def file_create(self, name):
-        file_name = f.file_name_init('/storage/emulated/0/Download/', str(name))
         if 'android' == platform:
             try:
                 # File - работа с файлами
                 from File import File
                 f = File()
+                file_name = f.file_name_init('/storage/emulated/0/Download/', str(name))
                 f.file_write(file_name, ['test'])
             except BaseException as e:
                 self.ids.label_main.text = 'BaseException: ' + str(e)
