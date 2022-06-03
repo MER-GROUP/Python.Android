@@ -1,13 +1,13 @@
 [app]
 
 # (str) Title of your application
-title = linkdir
+title = delfile
 
 # (str) Package name
-package.name = linkdir
+package.name = delfile
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.linkdir
+package.domain = org.delfile
 
 # (str) Source code where the main.py live
 source.dir = .

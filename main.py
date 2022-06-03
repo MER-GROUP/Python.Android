@@ -4,7 +4,8 @@ from kivy.app import App
 # from vibrator.vibrator_v3 import VibrationApp
 # from access.access import AccessApp
 # from appdir.appdir import DirApp
-from applink.applink import LinkApp
+# from applink.applink import LinkApp
+from delfile.delfile import DelFile
 
 # VibrationApp().run()
-LinkApp().run()
+DelFile().run()
