@@ -75,6 +75,19 @@ class Main(BoxLayout):
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
+    # создать файл в директории /storage/emulated/0/Download/
+    def file_create(self, name):
+        file_name = f.file_name_init('/storage/emulated/0/Download/', str(name))
+        if 'android' == platform:
+            try:
+                f.file_write(file_name, ['test'])
+            except BaseException as e:
+                self.ids.label_main.text = 'BaseException: ' + str(e)
+            except JavaException as e:
+                self.ids.label_main.text = 'JavaException: ' + str(e)
+        else:
+            self.ids.label_main.text = 'It is not Android'
+    # ---------------------------------------------------------------------------
     pass
     # ---------------------------------------------------------------------------
 # *****************************************************************************************
