@@ -79,11 +79,21 @@ class Main(BoxLayout):
     def file_create(self, name):
         if 'android' == platform:
             try:
+                # определяем директорию
+                path = join(dirname(__file__),'')
+
                 # File - работа с файлами
-                from File import File
+                try:
+                    from File import File
+                except (ModuleNotFoundError):
+                    from delfile.File import File
+
                 f = File()
                 file_name = f.file_name_init('/storage/emulated/0/Download/', str(name))
                 f.file_write(file_name, ['test'])
+
+                # test path
+                self.ids.label_main.text = str(path)
             except BaseException as e:
                 self.ids.label_main.text = 'BaseException: ' + str(e)
             except JavaException as e:
