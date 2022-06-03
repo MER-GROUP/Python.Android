@@ -31,19 +31,24 @@ import stat
 from kivy.utils import platform
 if 'android' == platform:
     # ---------------------------------------------------------------------------
-    # # permissions - права доступа
-    # from android.permissions import Permission, request_permissions, check_permission
+    # permissions - права доступа
+    from android.permissions import Permission, request_permissions, check_permission
 
-    # def check_permissions(perms):
-    #     for perm in perms:
-    #         if check_permission(perm) != True:
-    #             return False
-    #     return True
+    def check_permissions(perms):
+        for perm in perms:
+            if check_permission(perm) != True:
+                return False
+        return True
 
-    # perms = [Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE]
+    perms = [Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE]
         
-    # if  check_permissions(perms)!= True:
-    #     request_permissions(perms)
+    if  check_permissions(perms)!= True:
+        request_permissions(perms)
+    # ---------------------------------------------------------------------------
+    # получить Download путь к каталогу в Android
+    from android.storage import primary_external_storage_path
+    dir = primary_external_storage_path()
+    download_dir_path = os.path.join(dir, 'Download')
     # ---------------------------------------------------------------------------
     # autoclass - импорт java классов
     from jnius import autoclass, JavaException
@@ -79,8 +84,12 @@ class Main(BoxLayout):
     def file_create(self, name):
         if 'android' == platform:
             try:
-                # определяем директорию
-                path = join(dirname(__file__),'')
+                # # определяем директорию
+                # path = join(dirname(__file__),'')
+                # # test path
+                # self.ids.label_main.text = str(path)
+                # test check_permissions(perms)
+                self.ids.label_main.text = str('check_permissions: ') + str(check_permissions(perms))
 
                 # File - работа с файлами
                 try:
@@ -89,11 +98,11 @@ class Main(BoxLayout):
                     from delfile.File import File
 
                 f = File()
-                file_name = f.file_name_init('/storage/emulated/0/Download/', str(name))
-                f.file_write(file_name, ['test'])
+                # file_name = f.file_name_init('/storage/emulated/0/Download/', str(name))
+                file_name = f.file_name_init(str(download_dir_path), str(name))
+                f.file_write(file_name, ['test'])              
 
-                # test path
-                self.ids.label_main.text = str(path)
+                
             except BaseException as e:
                 self.ids.label_main.text = 'BaseException: ' + str(e)
             except JavaException as e:
