@@ -11,19 +11,25 @@ class File - класс для обработки файлов
 '''
 # *****************************************************************************************
 # модуль для легкого копирования файлов и папок
+# shutil.copyfileobj - копирование файлового объекта
 import shutil
 # модуль для работы с вводом и выводом в консоль
+# sys.stdout - вывод информации в терминал (консоль)
 import sys
 # импортируем молуль os.path
 # dirname - определяем текущую директорию
 # join - объеденяем директорию + файл (правильный путь файла)
 from os.path import dirname, join
+# импортируем молуль os
+# remove - удаляет указанный файл
+from os import remove
 # *****************************************************************************************
 # класс для работы с файлом
 class File:
     '''
     class File - класс для обработки файлов
     методы:
+        file_delete(self, file: str) -> bool
         file_name_init(folder: str, filename: str) -> str
         file_read(file: str) -> list[str] 
         file_read_utf8(file: str) -> list[str]  
@@ -33,6 +39,24 @@ class File:
         file_list_console(arr: list) -> None   
         file_print_console_utf8(file: str) -> None 
     '''
+    # ---------------------------------------------------------------------------
+    # удаление файла с носителя
+    def file_delete(self, file: str) -> bool:
+        '''
+        file_delete(self, file: str) -> bool:                       
+                удаление файла с носителя            
+                возвращаемое значение - bool (True - удалено, False - ошибка)   
+        параметры:                                               
+                file: str - имя файла которое неоходимо удалить с носителя                       
+        '''
+        try:
+            # delete file
+            remove(file)
+            return True
+        except (FileNotFoundError) as e:
+            # show msg except
+            # print(e)
+            return False
     # ---------------------------------------------------------------------------
     # инициализация полного имени файла (директория + имя файла)
     def file_name_init(self, folder: str, filename: str) -> str:
@@ -226,9 +250,17 @@ if __name__ == '__main__':
         # ---------------------------------------------------------------------------
         # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
         print('----------инициализация полного имени файла (директория + имя файла)----------')
-        file_name = f.file_name_init('/temp/', 'test_read.txt')
+        file_name = f.file_name_init('./temp/', 'test_read.txt')
         print(file_name)
         print(type(file_name))
+        # ---------------------------------------------------------------------------
+        # удаление файла с носителя
+        file_name = f.file_name_init('./temp/', 'test_write.txt')
+        print('----------удаление файла с носителя----------')
+        if (f.file_delete(file_name)):
+            print(f'Файл {file_name} удален')
+        else:
+            print('Ошибка удаления')
         # ---------------------------------------------------------------------------
     # выполнить тест
     main()
