@@ -15,8 +15,8 @@ from kivy.lang import Builder
 Builder.load_file(join(dirname(__file__), 'main.kv'))
 # *****************************************************************************************
 # File - работа с файлами
-from File import File
-f = File()
+# from File import File
+# f = File()
 # *****************************************************************************************
 # импортируем молуль os
 # listdir - файлы в текущей директории
@@ -80,6 +80,9 @@ class Main(BoxLayout):
         file_name = f.file_name_init('/storage/emulated/0/Download/', str(name))
         if 'android' == platform:
             try:
+                # File - работа с файлами
+                from File import File
+                f = File()
                 f.file_write(file_name, ['test'])
             except BaseException as e:
                 self.ids.label_main.text = 'BaseException: ' + str(e)
