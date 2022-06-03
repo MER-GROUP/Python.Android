@@ -48,7 +48,7 @@ if 'android' == platform:
     # получить Download путь к каталогу в Android
     from android.storage import primary_external_storage_path
     dir = primary_external_storage_path()
-    download_dir_path = os.path.join(dir, 'Download')
+    download_dir_path = os.path.join(dir, 'Download/')
     # ---------------------------------------------------------------------------
     # autoclass - импорт java классов
     from jnius import autoclass, JavaException
@@ -89,7 +89,9 @@ class Main(BoxLayout):
                 # # test path
                 # self.ids.label_main.text = str(path)
                 # test check_permissions(perms)
-                self.ids.label_main.text = str('check_permissions: ') + str(check_permissions(perms))
+                # self.ids.label_main.text = str('check_permissions: ') + str(check_permissions(perms))
+                # test
+                self.ids.label_main.text = str(download_dir_path)
 
                 # File - работа с файлами
                 try:
