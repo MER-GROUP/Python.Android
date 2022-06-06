@@ -22,6 +22,19 @@
         id: button_main_file_create
         text: 'file_create()'
         on_release: root.file_create(text_input_file.text)
+     ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_file_delete
+        text: 'file_delete()'
+        on_release: root.file_delete(text_input_file.text)
+    # ---------------------------------------------------------------------- 
+    LabelProgram:
+        id: label_program_2
+        text: 'ВВЕДИТЕ ИМЯ ФАЙЛА ДЛЯ ДИРЕКТОРИИ ./temp/:'
+    # ---------------------------------------------------------------------- 
+    TextInputFile:
+        id: text_input_file_2
+        text: './temp/test.txt'
     # ---------------------------------------------------------------------- 
     # ScrollView - прокрутка текста
     BoxLayout:

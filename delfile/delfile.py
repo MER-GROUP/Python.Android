@@ -102,9 +102,36 @@ class Main(BoxLayout):
                 f = File()
                 # file_name = f.file_name_init('/storage/emulated/0/Download/', str(name))
                 file_name = f.file_name_init(str(download_dir_path), str(name))
-                f.file_write(file_name, ['test'])              
+                f.file_write(file_name, ['test'])                          
+            except BaseException as e:
+                self.ids.label_main.text = 'BaseException: ' + str(e)
+            except JavaException as e:
+                self.ids.label_main.text = 'JavaException: ' + str(e)
+        else:
+            self.ids.label_main.text = 'It is not Android'
+    # ---------------------------------------------------------------------------
+    # удалить файл в директории /storage/emulated/0/Download/
+    def file_delete(self, name):
+        if 'android' == platform:
+            try:
+                # # определяем директорию
+                # path = join(dirname(__file__),'')
+                # # test path
+                # self.ids.label_main.text = str(path)
+                # test check_permissions(perms)
+                # self.ids.label_main.text = str('check_permissions: ') + str(check_permissions(perms))
+                # test
+                self.ids.label_main.text = str(download_dir_path)
 
-                
+                # File - работа с файлами
+                try:
+                    from File import File
+                except (ModuleNotFoundError):
+                    from delfile.File import File
+
+                # file_name = f.file_name_init('/storage/emulated/0/Download/', str(name))
+                file_name = File.file_name_init(File, str(download_dir_path), str(name))
+                File.file_delete(file_name)                            
             except BaseException as e:
                 self.ids.label_main.text = 'BaseException: ' + str(e)
             except JavaException as e:
