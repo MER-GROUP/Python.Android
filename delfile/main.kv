@@ -23,6 +23,39 @@
         text: 'file_create()'
         on_release: root.file_create(text_input_file.text)
     # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_file_delete
+        text: 'file_delete()'
+        on_release: root.file_delete(text_input_file.text)
+    # ---------------------------------------------------------------------- 
+    LabelProgram:
+        id: label_program_2
+        text: 'ВВЕДИТЕ ИМЯ ФАЙЛА ДЛЯ ДИРЕКТОРИИ ./temp/:'
+    # ---------------------------------------------------------------------- 
+    TextInputFile:
+        id: text_input_file_2
+        text: './temp/test.txt'
+    # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_file_create_2
+        text: 'file_create()-2'
+        on_release: root.file_create_2(text_input_file_2.text)
+    # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_file_delete_2
+        text: 'file_delete()-2'
+        on_release: root.file_delete_2(text_input_file_2.text)
+    # ----------------------------------------------------------------------  
+    ButtonMain:
+        id: button_main_get_lang
+        text: 'get_lang()'
+        on_release: root.get_lang()
+    # ----------------------------------------------------------------------  
+    ButtonMain:
+        id: button_main_get_installer
+        text: 'get_installer()'
+        on_release: root.get_installer()
+    # ---------------------------------------------------------------------- 
     # ScrollView - прокрутка текста
     BoxLayout:
         orientation: 'horizontal'

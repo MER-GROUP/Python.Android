@@ -102,15 +102,118 @@ class Main(BoxLayout):
                 f = File()
                 # file_name = f.file_name_init('/storage/emulated/0/Download/', str(name))
                 file_name = f.file_name_init(str(download_dir_path), str(name))
-                f.file_write(file_name, ['test'])              
-
-                
+                f.file_write(file_name, ['test'])                          
             except BaseException as e:
                 self.ids.label_main.text = 'BaseException: ' + str(e)
             except JavaException as e:
                 self.ids.label_main.text = 'JavaException: ' + str(e)
         else:
             self.ids.label_main.text = 'It is not Android'
+    # ---------------------------------------------------------------------------
+    # удалить файл в директории /storage/emulated/0/Download/
+    def file_delete(self, name):
+        if 'android' == platform:
+            try:
+                # # определяем директорию
+                # path = join(dirname(__file__),'')
+                # # test path
+                # self.ids.label_main.text = str(path)
+                # test check_permissions(perms)
+                # self.ids.label_main.text = str('check_permissions: ') + str(check_permissions(perms))
+                # test
+                self.ids.label_main.text = str(download_dir_path)
+
+                # File - работа с файлами
+                try:
+                    from File import File
+                except (ModuleNotFoundError):
+                    from delfile.File import File
+
+                f = File()
+                # file_name = f.file_name_init('/storage/emulated/0/Download/', str(name))
+                file_name = f.file_name_init(str(download_dir_path), str(name))
+                f.file_delete(file_name)                            
+            except BaseException as e:
+                self.ids.label_main.text = 'BaseException: ' + str(e)
+            except JavaException as e:
+                self.ids.label_main.text = 'JavaException: ' + str(e)
+        else:
+            self.ids.label_main.text = 'It is not Android'
+    # ---------------------------------------------------------------------------
+    # создать файл в директории ./temp/
+    def file_create_2(self, name):
+        if 'linux' == platform:
+            try:
+                # File - работа с файлами
+                try:
+                    from File import File
+                except (ModuleNotFoundError):
+                    from delfile.File import File
+
+                f = File()
+                f.file_write(str(name), ['test.txt'])                     
+            except BaseException as e:
+                self.ids.label_main.text = 'BaseException: ' + str(e)
+            except JavaException as e:
+                self.ids.label_main.text = 'JavaException: ' + str(e)
+        else:
+            self.ids.label_main.text = 'It is not Android'
+    # ---------------------------------------------------------------------------
+    # удалить файл в директории ./temp/
+    def file_delete_2(self, name):
+        if 'linux' == platform:
+            try:
+                # File - работа с файлами
+                try:
+                    from File import File
+                except (ModuleNotFoundError):
+                    from delfile.File import File
+
+                f = File()
+                f.file_delete(str(name))                     
+            except BaseException as e:
+                self.ids.label_main.text = 'BaseException: ' + str(e)
+            except JavaException as e:
+                self.ids.label_main.text = 'JavaException: ' + str(e)
+        else:
+            self.ids.label_main.text = 'It is not Android'
+    # ---------------------------------------------------------------------------
+    # взять язык ОС установленный по умолчанию
+    def get_lang(self):
+        if 'android' == platform:
+            try:
+                # File - работа с файлами
+                try:
+                    from File import File
+                except (ModuleNotFoundError):
+                    from delfile.File import File
+
+                f = File()
+                self.ids.label_main.text = f.file_get_local_language()
+            except BaseException as e:
+                self.ids.label_main.text = 'BaseException: ' + str(e)
+            except JavaException as e:
+                self.ids.label_main.text = 'JavaException: ' + str(e)
+        else:
+            # File - работа с файлами
+            try:
+                from File import File
+            except (ModuleNotFoundError):
+                from delfile.File import File
+
+            f = File()
+            self.ids.label_main.text = f.file_get_local_language()
+    # ---------------------------------------------------------------------------
+    # определить установщик программы
+    def get_installer(self):
+        # File - работа с файлами
+        try:
+            from File import File
+        except (ModuleNotFoundError):
+            from delfile.File import File
+
+        f = File()
+        self.ids.label_main.text = f.file_get_installer()
     # ---------------------------------------------------------------------------
     pass
     # ---------------------------------------------------------------------------
