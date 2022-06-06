@@ -139,6 +139,70 @@ class Main(BoxLayout):
         else:
             self.ids.label_main.text = 'It is not Android'
     # ---------------------------------------------------------------------------
+    # создать файл в директории ./temp/
+    def file_create_2(self, name):
+        if 'linux' == platform:
+            try:
+                # File - работа с файлами
+                try:
+                    from File import File
+                except (ModuleNotFoundError):
+                    from delfile.File import File
+
+                f = File()
+                f.file_write(str(name), ['test.txt'])                     
+            except BaseException as e:
+                self.ids.label_main.text = 'BaseException: ' + str(e)
+            except JavaException as e:
+                self.ids.label_main.text = 'JavaException: ' + str(e)
+        else:
+            self.ids.label_main.text = 'It is not Android'
+    # ---------------------------------------------------------------------------
+    # удалить файл в директории ./temp/
+    def file_delete_2(self, name):
+        if 'linux' == platform:
+            try:
+                # File - работа с файлами
+                try:
+                    from File import File
+                except (ModuleNotFoundError):
+                    from delfile.File import File
+
+                f = File()
+                f.file_delete(str(name))                     
+            except BaseException as e:
+                self.ids.label_main.text = 'BaseException: ' + str(e)
+            except JavaException as e:
+                self.ids.label_main.text = 'JavaException: ' + str(e)
+        else:
+            self.ids.label_main.text = 'It is not Android'
+    # ---------------------------------------------------------------------------
+    # взять язык ОС установленный по умолчанию
+    def get_lang(self):
+        if 'android' == platform:
+            try:
+                # File - работа с файлами
+                try:
+                    from File import File
+                except (ModuleNotFoundError):
+                    from delfile.File import File
+
+                f = File()
+                self.ids.label_main.text = f.file_get_local_language()
+            except BaseException as e:
+                self.ids.label_main.text = 'BaseException: ' + str(e)
+            except JavaException as e:
+                self.ids.label_main.text = 'JavaException: ' + str(e)
+        else:
+            # File - работа с файлами
+            try:
+                from File import File
+            except (ModuleNotFoundError):
+                from delfile.File import File
+
+            f = File()
+            self.ids.label_main.text = f.file_get_local_language()
+    # ---------------------------------------------------------------------------
     pass
     # ---------------------------------------------------------------------------
 # *****************************************************************************************

@@ -36,6 +36,21 @@
         id: text_input_file_2
         text: './temp/test.txt'
     # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_file_create_2
+        text: 'file_create()-2'
+        on_release: root.file_create_2(text_input_file_2.text)
+    # ---------------------------------------------------------------------- 
+    ButtonMain:
+        id: button_main_file_delete_2
+        text: 'file_delete()-2'
+        on_release: root.file_delete_2(text_input_file_2.text)
+    # ----------------------------------------------------------------------  
+    ButtonMain:
+        id: button_main_get_lang
+        text: 'get_lang()'
+        on_release: root.get_lang()
+    # ---------------------------------------------------------------------- 
     # ScrollView - прокрутка текста
     BoxLayout:
         orientation: 'horizontal'
