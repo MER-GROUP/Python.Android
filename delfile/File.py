@@ -289,11 +289,11 @@ class File:
                 получает установщик данного файла\n 
                 возвращаемое значение - str (строка)\n 
         возвращаемое значение для android\n 
-            com.google.android.packageinstaller - установка с телефона\n 
-            com.android.vending - установка с 'google play market'\n 
-            com.amazon.venezia - установка с amazon.com\n 
+                com.google.android.packageinstaller - установка с телефона\n 
+                com.android.vending - установка с 'google play market'\n 
+                com.amazon.venezia - установка с amazon.com\n 
         возвращаемое значение для остальных ОС\n 
-            unknown - источник установки неизвестен\n 
+                unknown - источник установки неизвестен\n 
         параметры:\n                                              
                 нет параметров\n                        
         '''

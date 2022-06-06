@@ -204,6 +204,17 @@ class Main(BoxLayout):
             f = File()
             self.ids.label_main.text = f.file_get_local_language()
     # ---------------------------------------------------------------------------
+    # определить установщик программы
+    def get_installer(self):
+        # File - работа с файлами
+        try:
+            from File import File
+        except (ModuleNotFoundError):
+            from delfile.File import File
+
+        f = File()
+        self.ids.label_main.text = f.file_get_installer()
+    # ---------------------------------------------------------------------------
     pass
     # ---------------------------------------------------------------------------
 # *****************************************************************************************
