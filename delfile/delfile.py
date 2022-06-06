@@ -129,8 +129,9 @@ class Main(BoxLayout):
                 except (ModuleNotFoundError):
                     from delfile.File import File
 
+                f = File()
                 # file_name = f.file_name_init('/storage/emulated/0/Download/', str(name))
-                file_name = File.file_name_init(File, str(download_dir_path), str(name))
+                file_name = f.file_name_init(str(download_dir_path), str(name))
                 File.file_delete(file_name)                            
             except BaseException as e:
                 self.ids.label_main.text = 'BaseException: ' + str(e)
