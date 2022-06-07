@@ -45,7 +45,6 @@ import stat
 # Path - задает путь к файлу
 # Path.unlink - отмена связи или удаление файла по указанному пути
 from pathlib import Path
-
 # импортируем молуль locale - Сервисы интернационализации
 import locale
 # *****************************************************************************************
@@ -202,18 +201,21 @@ class File:
                 folder: str - создать директорию в текущей папке\n    
                 filename: str - создать файл в директории folder\n    
         '''
-        # определяем текущую директорию, гбе будет храниться файл
-        CURRENT_DIR = dirname(__file__)
-        # задаем имя папки (директории)
-        FOLDER = folder
-        # задаем имя файла для чтения/записи данных
-        FILENAME = filename
-        # объединяем текущую директорию и файл
-        FILE_PATH = join(CURRENT_DIR, FOLDER + FILENAME)
-        # определяем тип FILE_PATH
-        # print('FILE_PATH :', type(FILE_PATH))
-        # возвращаеи полное имя файла (директория + имя файла)
-        return FILE_PATH
+        try:
+            # определяем текущую директорию, гбе будет храниться файл
+            CURRENT_DIR = dirname(__file__)
+            # задаем имя папки (директории)
+            FOLDER = folder
+            # задаем имя файла для чтения/записи данных
+            FILENAME = filename
+            # объединяем текущую директорию и файл
+            FILE_PATH = join(CURRENT_DIR, FOLDER + FILENAME)
+            # определяем тип FILE_PATH
+            # print('FILE_PATH :', type(FILE_PATH))
+            # возвращаеи полное имя файла (директория + имя файла)
+            return str(Path(FILE_PATH))
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # получить все файлы и папки в текущей директории
     def file_get_current_dir_files(self) -> list[str]:
@@ -224,8 +226,11 @@ class File:
         параметры:\n                                            
                 нет параметров\n                        
         '''
-        files_arr = listdir()
-        return files_arr
+        try:
+            files_arr = listdir()
+            return files_arr
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # получить все файлы и папки в указанной директории
     def file_get_dir_files(self, dir: str) -> list[str]:
@@ -236,11 +241,14 @@ class File:
         параметры:\n                                                
                 dir: str - имя директории которую необходимо показать\n                
         '''
-        # определить имя директории
-        dir_name = self.file_name_init('', dir)
-        # получить все файлы и папки в указанной директории
-        files_arr = listdir(dir_name)
-        return files_arr
+        try:
+            # определить имя директории
+            dir_name = self.file_name_init('', dir)
+            # получить все файлы и папки в указанной директории
+            files_arr = listdir(dir_name)
+            return files_arr
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # получить все установленные права доступа файлов в текущей директории
     # в виде str (rwx)
@@ -253,14 +261,17 @@ class File:
         параметры:\n                                              
                 нет параметров\n                        
         '''
-        # массив установленных разрешений для файлов и папок
-        access_arr = list()
-        # заполняем массив установленныз разрешений для файлов и папок
-        for file in self.file_get_current_dir_files():
-            # Определим установленные разрешения в виде букв -rwx
-            access_arr.append(stat.filemode(os.stat(file).st_mode))
-        # return
-        return access_arr
+        try:
+            # массив установленных разрешений для файлов и папок
+            access_arr = list()
+            # заполняем массив установленныз разрешений для файлов и папок
+            for file in self.file_get_current_dir_files():
+                # Определим установленные разрешения в виде букв -rwx
+                access_arr.append(stat.filemode(os.stat(file).st_mode))
+            # return
+            return access_arr
+        except(BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # получить все установленные права доступа файлов в текущей директории
     # в виде int (777)
@@ -273,14 +284,17 @@ class File:
         параметры:\n                                              
                 нет параметров\n                        
         '''
-        # массив установленных разрешений для файлов и папок
-        access_arr = list()
-        # заполняем массив установленныз разрешений для файлов и папок
-        for file in self.file_get_current_dir_files():
-            # Определим установленные разрешения в виде чисел - int (777)
-            access_arr.append(stat.S_IMODE(os.stat(file).st_mode))
-        # return
-        return access_arr
+        try:
+            # массив установленных разрешений для файлов и папок
+            access_arr = list()
+            # заполняем массив установленныз разрешений для файлов и папок
+            for file in self.file_get_current_dir_files():
+                # Определим установленные разрешения в виде чисел - int (777)
+                access_arr.append(stat.S_IMODE(os.stat(file).st_mode))
+            # return
+            return access_arr
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # получить установщик данного файла
     def file_get_installer(self) -> str:
@@ -297,41 +311,44 @@ class File:
         параметры:\n                                              
                 нет параметров\n                        
         '''
-        # создаем свое исключение
-        class file_get_installer_ERROR(BaseException):
-            pass
-        # if android
-        if hasattr(sys, 'getandroidapilevel'):
-            # получить установщик данного файла
-            from jnius import autoclass, JavaException
-            try:
-                Context = autoclass('android.content.Context')
+        try:
+            # создаем свое исключение
+            class file_get_installer_ERROR(BaseException):
+                pass
+            # if android
+            if hasattr(sys, 'getandroidapilevel'):
                 # получить установщик данного файла
-                return str(
-                    Context.getPackageManager().getInstallerPackageName(
-                        str(Context.getPackageName())
+                from jnius import autoclass, JavaException
+                try:
+                    Context = autoclass('android.content.Context')
+                    # получить установщик данного файла
+                    return str(
+                        Context.getPackageManager().getInstallerPackageName(
+                            str(Context.getPackageName())
+                            )
                         )
-                    )
-            except (BaseException) as e:
-                return ('BaseException: ' + str(e))
-            except (JavaException) as e:
-                return ('JavaException: ' + str(e))
-        # if linux and freebsd and macosx
-        elif (sys.platform.startswith("linux") or 
-                sys.platform.startswith("linux2") or
-                sys.platform.startswith("freebsd") or
-                sys.platform == "darwin"):
-            return 'unknown'
-        # if windows
-        elif sys.platform in ("win", "win32", "win64", "cygwin"):
-            return 'unknown'
-        # if unknown
-        else:
-            try:
-                raise file_get_installer_ERROR
-            except (file_get_installer_ERROR) as e:
-                return (str(e) + ' OS is unknown')
-            # return 'unknown'
+                except (BaseException) as e:
+                    return ('BaseException: ' + str(e))
+                except (JavaException) as e:
+                    return ('JavaException: ' + str(e))
+            # if linux and freebsd and macosx
+            elif (sys.platform.startswith("linux") or 
+                    sys.platform.startswith("linux2") or
+                    sys.platform.startswith("freebsd") or
+                    sys.platform == "darwin"):
+                return 'unknown'
+            # if windows
+            elif sys.platform in ("win", "win32", "win64", "cygwin"):
+                return 'unknown'
+            # if unknown
+            else:
+                try:
+                    raise file_get_installer_ERROR
+                except (file_get_installer_ERROR) as e:
+                    return (str(e) + ' OS is unknown')
+                # return 'unknown'
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # получить путь/директорию к папке Downloads
     def file_get_path_to_downloads(self) -> str:
@@ -342,43 +359,50 @@ class File:
         параметры:\n                                              
                 нет параметров\n                        
         '''
-        # создаем свое исключение
-        class file_get_path_to_downloads_ERROR(BaseException):
-            pass
-        # if android
-        if hasattr(sys, 'getandroidapilevel'):
-            # получить Download путь к каталогу в Android
-            from android.storage import primary_external_storage_path
-            dir = primary_external_storage_path()
-            downloads_path = os.path.join(dir, './Download/')
-            return downloads_path
-        # if linux and freebsd and macosx
-        elif (sys.platform.startswith("linux") or 
-                sys.platform.startswith("linux2") or
-                sys.platform.startswith("freebsd") or
-                sys.platform == "darwin"):
-            # downloads_path = str(Path.home()/"Downloads")
-            # downloads_path = str(os.path.join(Path.home(), "Downloads"))
-            downloads_path = str(os.path.join(Path.home(), "./Downloads/"))
-            return downloads_path
-        # if windows
-        elif sys.platform in ("win", "win32", "win64", "cygwin"):
-            # работа с реестром windows
-            import winreg
-            sub_key = r'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders'
-            downloads_guid = '{374DE290-123F-4565-9164-39C4925E467B}'
-            downloads_path_win = None
-            with winreg.OpenKey(winreg.HKEY_CURRENT_USER, sub_key) as key:
-                downloads_path_win = winreg.QueryValueEx(key, downloads_guid)[0]
-            downloads_path = str(Path(downloads_path_win)) + '\\'
-            return downloads_path
-        # if unknown
-        else:
-            try:
-                raise file_get_path_to_downloads_ERROR
-            except (file_get_path_to_downloads_ERROR) as e:
-                return (str(e) + ' OS is unknown')
-            # return 'unknown'
+        try:
+            # создаем свое исключение
+            class file_get_path_to_downloads_ERROR(BaseException):
+                pass
+            # if android
+            if hasattr(sys, 'getandroidapilevel'):
+                # получить Download путь к каталогу в Android
+                from android.storage import primary_external_storage_path
+                dir = primary_external_storage_path()
+                downloads_path = os.path.join(dir, './Download/')
+                return downloads_path
+            # if linux and freebsd and macosx
+            elif (sys.platform.startswith("linux") or 
+                    sys.platform.startswith("linux2") or
+                    sys.platform.startswith("freebsd") or
+                    sys.platform == "darwin"):
+                # downloads_path = str(Path.home()/"Downloads")
+                # downloads_path = str(os.path.join(Path.home(), "Downloads"))
+                downloads_path = None
+                if ('ru' == self.file_get_local_language()):
+                    downloads_path = str(os.path.join(Path.home(), "./Загрузки/"))
+                else:
+                    downloads_path = str(os.path.join(Path.home(), "./Downloads/"))
+                return downloads_path
+            # if windows
+            elif sys.platform in ("win", "win32", "win64", "cygwin"):
+                # работа с реестром windows
+                import winreg
+                sub_key = r'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders'
+                downloads_guid = '{374DE290-123F-4565-9164-39C4925E467B}'
+                downloads_path_win = None
+                with winreg.OpenKey(winreg.HKEY_CURRENT_USER, sub_key) as key:
+                    downloads_path_win = winreg.QueryValueEx(key, downloads_guid)[0]
+                downloads_path = str(Path(downloads_path_win)) + '\\'
+                return downloads_path
+            # if unknown
+            else:
+                try:
+                    raise file_get_path_to_downloads_ERROR
+                except (file_get_path_to_downloads_ERROR) as e:
+                    return (str(e) + ' OS is unknown')
+                # return 'unknown'
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # получить установленный по умолчанию язык операционной системы
     def file_get_local_language(self) -> str:
@@ -389,38 +413,42 @@ class File:
         параметры:\n                                              
                 нет параметров\n                        
         '''
-        # создаем свое исключение
-        class file_get_local_language_ERROR(BaseException):
-            pass
-        # if android
-        if hasattr(sys, 'getandroidapilevel'):
-            # Получение языка установленного в системе
-            from jnius import autoclass
-            language = autoclass("java.util.Locale").getDefault().getDisplayLanguage()
-            return language
-        # if linux and freebsd and macosx
-        elif (sys.platform.startswith("linux") or 
-                sys.platform.startswith("linux2") or
-                sys.platform.startswith("freebsd") or
-                sys.platform == "darwin"):
-            language = locale.getdefaultlocale()[0].split('_')[0]
-            return language
-        # if windows
-        elif sys.platform in ("win", "win32", "win64", "cygwin"):
-            import ctypes
-            windll = ctypes.windll.kernel32
-            windll.GetUserDefaultUILanguage()
-            language = locale.windows_locale[windll.GetUserDefaultUILanguage()]
-            return language
-        # if unknown
-        else:
-            try:
-                raise file_get_local_language_ERROR
-            except (file_get_local_language_ERROR) as e:
-                return (str(e) + ' OS is unknown')
-            # return 'unknown'
+        try:
+            # создаем свое исключение
+            class file_get_local_language_ERROR(BaseException):
+                pass
+            # if android
+            if hasattr(sys, 'getandroidapilevel'):
+                # Получение языка установленного в системе
+                from jnius import autoclass
+                language = autoclass("java.util.Locale").getDefault().getDisplayLanguage()
+                return language
+            # if linux and freebsd and macosx
+            elif (sys.platform.startswith("linux") or 
+                    sys.platform.startswith("linux2") or
+                    sys.platform.startswith("freebsd") or
+                    sys.platform == "darwin"):
+                language = locale.getdefaultlocale()[0].split('_')[0]
+                return language
+            # if windows
+            elif sys.platform in ("win", "win32", "win64", "cygwin"):
+                import ctypes
+                windll = ctypes.windll.kernel32
+                windll.GetUserDefaultUILanguage()
+                language = locale.windows_locale[windll.GetUserDefaultUILanguage()].split('_')[0]
+                return language
+            # if unknown
+            else:
+                try:
+                    raise file_get_local_language_ERROR
+                except (file_get_local_language_ERROR) as e:
+                    return (str(e) + ' OS is unknown')
+                # return 'unknown'
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # разрешить весь доступ к указанному файлу/директории
+    # работает только с файлофой системой unix (ext и т.д.)
     def file_set_access_open_all(self, name: str) -> bool:
         '''
         file_set_access_open_all(name: str) -> bool\n                      
@@ -439,12 +467,14 @@ class File:
             # задаем новые права доступа к файлу (разрешаем доступ)
             new_permissions = stat.S_IRWXU|stat.S_IRWXG|stat.S_IRWXO
             chmod(dir_file_name, new_permissions)
+            return True
         except (PermissionError) as e:
             # show msg except
             # print(e)
             return False
     # ---------------------------------------------------------------------------
     # запретить весь доступ к указанному файлу/директории
+    # работает только с файлофой системой unix (ext и т.д.)
     def file_set_access_close_all(self, name: str) -> bool:
         '''
         file_set_access_close_all(name: str) -> bool\n                      
@@ -463,6 +493,7 @@ class File:
             # задаем новые права доступа к файлу (запрещаем доступ)
             new_permissions = stat.S_ENFMT
             chmod(dir_file_name, new_permissions)
+            return True
         except (PermissionError) as e:
             # show msg except
             # print(e)
@@ -478,11 +509,14 @@ class File:
                 file: str - имя файла которое неоходимо открыть\n     
                     и прочитать\n                             
         '''
-        # определить имя файла
-        file_name = self.file_name_init('', file)
-        # открыть файл и прочитать построчно
-        with open(file_name, 'r') as f:
-            return f.readlines()
+        try:
+            # определить имя файла
+            file_name = self.file_name_init('', file)
+            # открыть файл и прочитать построчно
+            with open(file_name, 'r') as f:
+                return f.readlines()
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # чтение содержимого файла содержащий текст в utf-8 кодировке
     def file_read_utf8(self, file: str) -> list[str]:
@@ -494,16 +528,19 @@ class File:
                 file: str - имя файла которое неоходимо открыть\n     
                     и прочитать\n                             
         '''
-        # определить имя файла
-        file_name = self.file_name_init('', file)
-        # var
-        str_byte = None
-        # открыть файл и прочитать текст в utf-8 кодировке
-        with open(file_name, 'r', encoding='utf-8') as f:
-            # shutil.copyfileobj(f, str_byte.extend)
-            str_byte = f.read().encode('utf-8')
-        # print(repr(str(str_byte, 'utf-8')))
-        return str(str_byte, 'utf-8').split('\n')
+        try:
+            # определить имя файла
+            file_name = self.file_name_init('', file)
+            # var
+            str_byte = None
+            # открыть файл и прочитать текст в utf-8 кодировке
+            with open(file_name, 'r', encoding='utf-8') as f:
+                # shutil.copyfileobj(f, str_byte.extend)
+                str_byte = f.read().encode('utf-8')
+            # print(repr(str(str_byte, 'utf-8')))
+            return str(str_byte, 'utf-8').split('\n')
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # запись содержимого списка (list) в файл
     def file_write(self, file: str, arr: list) -> None:
@@ -516,14 +553,17 @@ class File:
                     для записи содержимого списка\n           
                 arr: list - список для записи в файл\n                
         '''
-        # определить имя файла
-        file_name = self.file_name_init('', file)
-        # в списке к концу строк добавляем \n (переход на новую строку)
-        for i in range(len(arr)):
-            arr[i] += '\n'
-        # создаем файл и записываем содержимое списка
-        with open(file_name, 'w') as f:
-            f.writelines(arr)
+        try:
+            # определить имя файла
+            file_name = self.file_name_init('', file)
+            # в списке к концу строк добавляем \n (переход на новую строку)
+            for i in range(len(arr)):
+                arr[i] += '\n'
+            # создаем файл и записываем содержимое списка
+            with open(file_name, 'w') as f:
+                f.writelines(arr)
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # дозапись содержимого списка (list) в файл
     def file_write_append(self, file: str, arr: list) -> None:
@@ -536,14 +576,17 @@ class File:
                     для дозаписи содержимого списка\n           
                 arr: list - список для дозаписи в файл\n                
         '''
-        # определить имя файла
-        file_name = self.file_name_init('', file)
-        # в списке к концу строк добавляем \n (переход на новую строку)
-        for i in range(len(arr)):
-            arr[i] += '\n'
-        # открываем файл и дозаписываем содержимое списка
-        with open(file_name, 'a') as f:
-            f.writelines(arr)
+        try:
+            # определить имя файла
+            file_name = self.file_name_init('', file)
+            # в списке к концу строк добавляем \n (переход на новую строку)
+            for i in range(len(arr)):
+                arr[i] += '\n'
+            # открываем файл и дозаписываем содержимое списка
+            with open(file_name, 'a') as f:
+                f.writelines(arr)
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # запись содержимого словаря (dict) в файл
     def file_write_dict(self, file: str, dictor: dict) -> None:
@@ -556,12 +599,15 @@ class File:
                     для записи содержимого словаря\n          
                 dictor: dict - словарь для записи в файл\n            
         '''
-        # определить имя файла
-        file_name = self.file_name_init('', file)
-        # создать файл и записать содержимое словаря (хэш таблицы)
-        with open(file_name, 'w') as f:
-            for k,v in dictor.items():
-                f.write(f'{k} {v}\n')
+        try:
+            # определить имя файла
+            file_name = self.file_name_init('', file)
+            # создать файл и записать содержимое словаря (хэш таблицы)
+            with open(file_name, 'w') as f:
+                for k,v in dictor.items():
+                    f.write(f'{k} {v}\n')
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # вывод в консоль содержимого списка (list)
     def file_list_print_console(self, arr: list) -> None:
@@ -572,11 +618,14 @@ class File:
         параметры:\n                                                
                 arr: list - список для вывода в консоль\n          
         '''
-        for line in arr:
-            # print(line.strip())
-            # print(repr(line))
-            # print(line, end='')
-            print(line)
+        try:
+            for line in arr:
+                # print(line.strip())
+                # print(repr(line))
+                # print(line, end='')
+                print(line)
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
     # (аналог type filename в cmd.exe)
@@ -590,11 +639,14 @@ class File:
                 file: str - имя файла которое неоходимо открыть,\n    
                     прочитать и вывести в консоль\n           
         '''
-        # определить имя файла
-        file_name = self.file_name_init('', file)
-        # открыть файл, скопировать содержимое в консоль (терминал)
-        with open(file_name, 'r', encoding='utf-8') as f:
-            shutil.copyfileobj(f, sys.stdout)
+        try:
+            # определить имя файла
+            file_name = self.file_name_init('', file)
+            # открыть файл, скопировать содержимое в консоль (терминал)
+            with open(file_name, 'r', encoding='utf-8') as f:
+                shutil.copyfileobj(f, sys.stdout)
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
 # *****************************************************************************************
 # тест
