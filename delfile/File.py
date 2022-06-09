@@ -416,7 +416,8 @@ class File:
                 # получить Download путь к каталогу в Android
                 from android.storage import primary_external_storage_path
                 dir = primary_external_storage_path()
-                downloads_path = os.path.join(dir, './Download/')
+                # downloads_path = os.path.join(dir, './Download/')
+                downloads_path = str(Path(join(dir, './Download/'))) + '/'
                 return downloads_path
             # if linux and freebsd and macosx
             elif (sys.platform.startswith("linux") or 
@@ -427,9 +428,9 @@ class File:
                 # downloads_path = str(os.path.join(Path.home(), "Downloads"))
                 downloads_path = None
                 if ('ru' == self.file_get_local_language()):
-                    downloads_path = str(os.path.join(Path.home(), "./Загрузки/"))
+                    downloads_path = str(Path(join(Path.home(), "./Загрузки/"))) + '/'
                 else:
-                    downloads_path = str(os.path.join(Path.home(), "./Downloads/"))
+                    downloads_path = str(Path(join(Path.home(), "./Downloads/"))) + '/'
                 return downloads_path
             # if windows
             elif sys.platform in ("win", "win32", "win64", "cygwin"):
