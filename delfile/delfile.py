@@ -215,6 +215,17 @@ class Main(BoxLayout):
         f = File()
         self.ids.label_main.text = f.file_get_installer()
     # ---------------------------------------------------------------------------
+    # определить путь в папке download
+    def get_download_path(self):
+        # File - работа с файлами
+        try:
+            from File import File
+        except (ModuleNotFoundError):
+            from delfile.File import File
+
+        f = File()
+        self.ids.label_main.text = f.file_get_path_to_downloads()
+    # ---------------------------------------------------------------------------
     pass
     # ---------------------------------------------------------------------------
 # *****************************************************************************************
